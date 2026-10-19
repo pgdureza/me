@@ -30,7 +30,15 @@
         "NOV",
         "DEC",
       ];
-      const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+      const days = [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+      ];
       if (dateHud) {
         dateHud.textContent = `${months[now.getMonth()]} ${now.getDate()} ${days[now.getDay()]}`;
       }
@@ -47,8 +55,8 @@
     "TESTS PASSED!",
     "PATCH DEPLOYED!",
     "EXECUTE PROTOCOL!",
-    "BUILD SUCCESSFUL!",
-    "MIGRATION COMPLETE!",
+    "BUILD SUCCESS!",
+    "MIGRATION DONE!",
     "TARGET LOCKED!",
     "HOTFIX APPLIED!",
     "STACK CLEARED!",

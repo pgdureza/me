@@ -55,6 +55,13 @@
     </div>
 
     <!-- ========================================================================
+       PERSISTENT TOP-RIGHT DYNAMIC DATE HUD
+       ======================================================================== -->
+    <div class="hud-calendar">
+      <div class="calendar-badge" id="hud-date">OCT 19 MON</div>
+    </div>
+
+    <!-- ========================================================================
        MAIN APPLICATION CONTAINER
        ======================================================================== -->
     <main id="app">
@@ -62,11 +69,6 @@
          VIEW 0: HOME SCREEN / MAIN COMMAND MENU
          ====================================================================== -->
       <section id="view-home" class="view-screen active" aria-label="Main Menu">
-        <!-- Top-Right Dynamic Date Stamp (Home Screen Only) -->
-        <div class="hud-calendar">
-          <div class="calendar-badge" id="hud-date">OCT 19 MON</div>
-        </div>
-
         <div class="home-main-layout view-stage-reveal">
           <!-- Left Column: Header & Menu -->
           <div class="home-content-col">
@@ -204,9 +206,11 @@
               </div>
               <h1 class="section-main-title"><span>ABOUT ME</span></h1>
             </div>
-            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
-              <span class="back-circle">✕</span> CANCEL [ESC]
-            </button>
+            <div class="section-hud-actions">
+              <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+                <span class="back-circle">✕</span> BACK [ESC]
+              </button>
+            </div>
           </header>
 
           <div class="section-content-viewport">
@@ -302,9 +306,11 @@
               </div>
               <h1 class="section-main-title"><span>SKILL MATRIX</span></h1>
             </div>
-            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
-              <span class="back-circle">✕</span> CANCEL [ESC]
-            </button>
+            <div class="section-hud-actions">
+              <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+                <span class="back-circle">✕</span> BACK [ESC]
+              </button>
+            </div>
           </header>
 
           <div class="section-content-viewport">
@@ -490,9 +496,11 @@
               </div>
               <h1 class="section-main-title"><span>WORK HISTORY</span></h1>
             </div>
-            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
-              <span class="back-circle">✕</span> CANCEL [ESC]
-            </button>
+            <div class="section-hud-actions">
+              <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+                <span class="back-circle">✕</span> BACK [ESC]
+              </button>
+            </div>
           </header>
 
           <div class="section-content-viewport">
@@ -665,9 +673,11 @@
               </div>
               <h1 class="section-main-title"><span>PERSONAL PROJECTS</span></h1>
             </div>
-            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
-              <span class="back-circle">✕</span> CANCEL [ESC]
-            </button>
+            <div class="section-hud-actions">
+              <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+                <span class="back-circle">✕</span> BACK [ESC]
+              </button>
+            </div>
           </header>
 
           <div class="section-content-viewport">
@@ -764,9 +774,11 @@
               </div>
               <h1 class="section-main-title"><span>CONNECT</span></h1>
             </div>
-            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
-              <span class="back-circle">✕</span> CANCEL [ESC]
-            </button>
+            <div class="section-hud-actions">
+              <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+                <span class="back-circle">✕</span> BACK [ESC]
+              </button>
+            </div>
           </header>
 
           <div class="section-content-viewport">

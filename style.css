@@ -128,17 +128,18 @@
     }
 
     /* ==========================================================================
-       TOP HUD: DYNAMIC DATE STAMP
+       TOP HUD: DYNAMIC DATE STAMP (PERSISTENT TOP-RIGHT)
        ========================================================================== */
     .hud-calendar {
-      position: absolute;
+      position: fixed;
       top: 18px;
       right: 28px;
       left: auto;
-      z-index: 20;
+      z-index: 50;
       display: flex;
       align-items: center;
       transform: skewX(-12deg) rotate(-2deg);
+      pointer-events: none;
     }
 
     .calendar-badge {
@@ -152,6 +153,7 @@
       border: 3px solid var(--p5-black);
       letter-spacing: 2px;
       text-transform: uppercase;
+      pointer-events: auto;
     }
 
     /* Bottom-Right "TAKE YOUR TIME" Iconic Badge */
@@ -808,7 +810,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       position: relative;
       z-index: 25;
       flex-shrink: 0;
@@ -833,7 +835,7 @@
 
     .section-main-title {
       font-family: var(--font-headline);
-      font-size: clamp(2rem, 5.5vw, 4rem);
+      font-size: clamp(1.8rem, 4.8vw, 3.6rem);
       line-height: 0.95;
       color: var(--p5-white);
       text-transform: uppercase;
@@ -850,51 +852,63 @@
       box-shadow: 5px 5px 0 var(--p5-black);
     }
 
-    /* P5 Cancel / Return Button */
+    /* Stacked Actions on the Right (Neatly below persistent date HUD) */
+    .section-hud-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 48px;
+      position: relative;
+      z-index: 30;
+      flex-shrink: 0;
+    }
+
+    /* P5 Cancel / Return Button (Right Anchored directly below Date) */
     .p5-back-btn {
       background: var(--p5-white);
       color: var(--p5-black);
       border: 3px solid var(--p5-black);
-      padding: 8px 18px;
+      padding: 6px 16px;
       font-family: var(--font-headline);
-      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
       text-transform: uppercase;
       letter-spacing: 2px;
       cursor: pointer;
-      box-shadow: 5px 5px 0 var(--p5-red);
-      transform: rotate(3deg) skewX(6deg);
+      box-shadow: 4px 4px 0 var(--p5-red);
+      transform: rotate(2.5deg) skewX(6deg);
       transition: all 0.15s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       outline: none;
+      white-space: nowrap;
     }
 
     .p5-back-btn .back-circle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       background: var(--p5-red);
       color: var(--p5-white);
       border-radius: 50%;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       border: 2px solid var(--p5-black);
     }
 
     .p5-back-btn:hover,
     .p5-back-btn:focus-visible {
-      transform: rotate(0deg) scale(1.08);
+      transform: rotate(0deg) scale(1.06);
       background: var(--p5-yellow);
-      box-shadow: 7px 7px 0 var(--p5-black);
+      box-shadow: 6px 6px 0 var(--p5-black);
     }
 
     /* Section Scrollable Viewport (Internal fixed scroll window) */
     .section-content-viewport {
       flex: 1;
       width: 100%;
-      max-height: calc(100vh - 130px);
+      max-height: calc(100vh - 145px);
       overflow-y: auto;
       overflow-x: hidden;
       padding-top: 28px;
@@ -1548,12 +1562,12 @@
     @media (max-width: 768px) {
       .hud-calendar {
         top: 10px;
-        right: 14px;
+        right: 12px;
         left: auto;
         transform: skewX(-8deg) rotate(-1deg);
       }
       .calendar-badge {
-        font-size: 1rem;
+        font-size: 0.95rem;
         padding: 3px 10px;
       }
       .hud-take-time {
@@ -1578,16 +1592,36 @@
         padding: 2px 8px;
         margin-right: 10px;
       }
-      .section-hud-header {
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 0.8rem;
-      }
       .section-stage {
-        padding: 1rem;
+        padding: 0.85rem;
+      }
+      .section-hud-actions {
+        margin-top: 42px;
+      }
+      .p5-back-btn {
+        padding: 4px 10px;
+        font-size: 0.9rem;
+        transform: rotate(2deg) skewX(4deg);
+      }
+      .p5-back-btn .back-circle {
+        width: 18px;
+        height: 18px;
+        font-size: 0.75rem;
+      }
+      .section-hud-header {
+        margin-bottom: 0.6rem;
+        gap: 8px;
+      }
+      .section-main-title {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+      }
+      .section-category-tag {
+        font-size: 0.85rem;
+        padding: 2px 8px;
       }
       .section-content-viewport {
-        max-height: calc(100vh - 110px);
+        max-height: calc(100vh - 125px);
+        padding-top: 16px;
         padding-bottom: 2rem;
       }
     }
