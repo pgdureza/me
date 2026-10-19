@@ -297,18 +297,18 @@ body.screen-recoil #app {
   background: var(--p5-black);
   z-index: 3;
   transform: rotate(-24deg) translateX(220%);
-  border-left: 6px solid var(--p5-yellow);
+  border-left: 6px solid var(--p5-white);
   box-shadow: -15px 0 45px rgba(0, 0, 0, 0.98);
 }
 
-/* Golden Energy Cutting Seam */
+/* White Energy Cutting Seam */
 .wipe-slash-line {
   position: absolute;
   width: 300vw;
   height: 10px;
-  background: var(--p5-yellow);
+  background: var(--p5-white);
   box-shadow:
-    0 0 20px var(--p5-yellow),
+    0 0 20px rgba(255, 255, 255, 0.95),
     0 0 40px var(--p5-red);
   transform: rotate(-24deg) scaleX(0);
   z-index: 4;
@@ -316,26 +316,31 @@ body.screen-recoil #app {
   will-change: transform, opacity;
 }
 
-/* Comic Spark Stars */
+/* Comic Spark Stars - Continuous Outward Blast across entire transition (3 yellow stars) */
 .wipe-spark-star {
   position: absolute;
-  font-size: 3rem;
+  top: 50%;
+  left: 50%;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
   color: var(--p5-yellow);
   text-shadow:
     3px 3px 0 var(--p5-black),
-    0 0 15px var(--p5-yellow);
+    0 0 18px var(--p5-yellow);
   z-index: 7;
   opacity: 0;
   pointer-events: none;
+  transform: translate(-50%, -50%);
   will-change: transform, opacity;
 }
-.wipe-spark-star.spark-1 {
-  top: 38%;
-  left: 45%;
+
+#slash-wipe.animating .wipe-spark-star.spark-1 {
+  animation: p5StarBurstOut1 0.54s cubic-bezier(0.12, 0.85, 0.35, 1) forwards;
 }
-.wipe-spark-star.spark-2 {
-  bottom: 40%;
-  right: 44%;
+#slash-wipe.animating .wipe-spark-star.spark-2 {
+  animation: p5StarBurstOut2 0.54s cubic-bezier(0.12, 0.85, 0.35, 1) 0.02s forwards;
+}
+#slash-wipe.animating .wipe-spark-star.spark-3 {
+  animation: p5StarBurstOut3 0.54s cubic-bezier(0.12, 0.85, 0.35, 1) 0.04s forwards;
 }
 
 /* Phase 1: Dual Counter-Slash Slices In */
@@ -426,7 +431,8 @@ body.screen-recoil #app {
   font-family: var(--font-headline);
   font-size: clamp(2.2rem, 6.5vw, 5.2rem);
   color: var(--p5-black);
-  background: var(--p5-yellow);
+  background: var(--p5-white);
+  border: 4px solid var(--p5-black);
   padding: 10px 42px;
   transform: rotate(-12deg) scale(0);
   box-shadow: 12px 12px 0 var(--p5-black);
@@ -443,13 +449,6 @@ body.screen-recoil #app {
 
 #slash-wipe.phase-out .wipe-cutin-text {
   animation: p5CutinBurstOut 0.16s ease-out forwards;
-}
-
-#slash-wipe.phase-in .wipe-spark-star.spark-1 {
-  animation: p5StarBurst1 0.28s ease-out forwards;
-}
-#slash-wipe.phase-in .wipe-spark-star.spark-2 {
-  animation: p5StarBurst2 0.28s ease-out 0.04s forwards;
 }
 
 @keyframes p5CutinHitStop {
@@ -481,33 +480,63 @@ body.screen-recoil #app {
   }
 }
 
-@keyframes p5StarBurst1 {
+/* Star 1: Continuous Outward Blast to Top-Left */
+@keyframes p5StarBurstOut1 {
   0% {
-    transform: scale(0) rotate(0deg);
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
     opacity: 0;
   }
-  50% {
-    transform: scale(1.4) rotate(90deg) translate(-20px, -20px);
+  20% {
     opacity: 1;
+    transform: translate(calc(-50% - 60px), calc(-50% - 50px)) scale(1.4) rotate(70deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translate(calc(-50% - 150px), calc(-50% - 120px)) scale(1.1) rotate(160deg);
   }
   100% {
-    transform: scale(1) rotate(180deg) translate(-40px, -35px);
     opacity: 0;
+    transform: translate(calc(-50% - 220px), calc(-50% - 175px)) scale(0.4) rotate(240deg);
   }
 }
 
-@keyframes p5StarBurst2 {
+/* Star 2: Continuous Outward Blast to Bottom-Right */
+@keyframes p5StarBurstOut2 {
   0% {
-    transform: scale(0) rotate(0deg);
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
     opacity: 0;
   }
-  50% {
-    transform: scale(1.5) rotate(-90deg) translate(20px, 20px);
+  20% {
     opacity: 1;
+    transform: translate(calc(-50% + 65px), calc(-50% + 55px)) scale(1.4) rotate(-70deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translate(calc(-50% + 155px), calc(-50% + 125px)) scale(1.1) rotate(-160deg);
   }
   100% {
-    transform: scale(1) rotate(-180deg) translate(40px, 35px);
     opacity: 0;
+    transform: translate(calc(-50% + 230px), calc(-50% + 180px)) scale(0.4) rotate(-240deg);
+  }
+}
+
+/* Star 3: Continuous Outward Blast to Top-Right */
+@keyframes p5StarBurstOut3 {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(calc(-50% + 70px), calc(-50% - 60px)) scale(1.3) rotate(60deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translate(calc(-50% + 160px), calc(-50% - 135px)) scale(1) rotate(140deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 235px), calc(-50% - 190px)) scale(0.35) rotate(220deg);
   }
 }
 
