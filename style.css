@@ -1366,6 +1366,7 @@ body.screen-recoil #app {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-left: 5px;
 }
 
 .mission-card {
