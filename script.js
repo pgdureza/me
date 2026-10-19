@@ -136,28 +136,77 @@
     }, 220); // 220ms slice-in collision!
   }
 
+  // Navigation dispatch helpers via p5Router
+  function navigateTo(targetViewId) {
+    if (window.p5Router) {
+      window.p5Router.navigateTo(targetViewId);
+    } else {
+      switchView(targetViewId);
+    }
+  }
+
+  function navigateBack() {
+    if (window.p5Router) {
+      window.p5Router.navigateBack();
+    } else {
+      switchView("view-home");
+    }
+  }
+
+  // Initialize Router and listen for route / history changes
+  if (window.p5Router) {
+    const initialView = window.p5Router.init((targetViewId) => {
+      switchView(targetViewId);
+    });
+
+    // If loaded directly with a route hash (e.g. #skill-matrix), open directly on that view
+    if (initialView && initialView !== "view-home") {
+      screens.forEach((screen) => {
+        if (screen.id === initialView) {
+          screen.classList.add("active");
+        } else {
+          screen.classList.remove("active");
+        }
+      });
+      document.querySelectorAll(".quick-nav-pill").forEach((pill) => {
+        if (pill.dataset.target === initialView) {
+          pill.classList.add("active");
+        } else if (pill.dataset.target) {
+          pill.classList.remove("active");
+        }
+      });
+      currentViewId = initialView;
+
+      const targetScreen = document.getElementById(initialView);
+      if (targetScreen) {
+        const stage = targetScreen.querySelector(".section-stage");
+        if (stage) stage.classList.add("view-stage-reveal");
+      }
+    }
+  }
+
   // Main Menu Click & Key Events
   menuItems.forEach((item) => {
     const target = item.getAttribute("data-target");
-    item.addEventListener("click", () => switchView(target));
+    item.addEventListener("click", () => navigateTo(target));
     item.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        switchView(target);
+        navigateTo(target);
       }
     });
   });
 
   // Back / Cancel Buttons
   backButtons.forEach((btn) => {
-    btn.addEventListener("click", () => switchView("view-home"));
+    btn.addEventListener("click", () => navigateBack());
   });
 
   // Quick Nav Buttons
   quickNavButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-target");
-      if (target) switchView(target);
+      if (target) navigateTo(target);
     });
   });
 
@@ -171,7 +220,7 @@
       currentViewId !== "view-home"
     ) {
       e.preventDefault();
-      switchView("view-home");
+      navigateBack();
       return;
     }
 
@@ -179,19 +228,19 @@
     if (currentViewId === "view-home") {
       switch (e.key) {
         case "1":
-          switchView("view-about");
+          navigateTo("view-about");
           break;
         case "2":
-          switchView("view-skills");
+          navigateTo("view-skills");
           break;
         case "3":
-          switchView("view-history");
+          navigateTo("view-history");
           break;
         case "4":
-          switchView("view-projects");
+          navigateTo("view-projects");
           break;
         case "5":
-          switchView("view-connect");
+          navigateTo("view-connect");
           break;
       }
     }
