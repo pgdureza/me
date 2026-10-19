@@ -199,6 +199,9 @@
     /* ==========================================================================
        SCREEN WIPE OVERLAY (SLASH TRANSITION - NO WHITE FLASHES)
        ========================================================================== */
+    /* ==========================================================================
+       SCREEN WIPE OVERLAY (AUTHENTIC P5 DUAL COUNTER-SLASH & HIT-STOP)
+       ========================================================================== */
     #slash-wipe {
       position: fixed;
       inset: 0;
@@ -214,89 +217,135 @@
       display: flex;
     }
 
+    /* Screen Recoil Shockwave on outgoing view */
+    body.screen-recoil #app {
+      transform: scale(0.975) rotate(-0.5deg);
+      filter: brightness(0.9) contrast(1.1);
+      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), filter 0.16s ease;
+    }
+
+    #app {
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.25s ease;
+    }
+
     .wipe-blade {
       position: absolute;
-      width: 260vw;
-      height: 260vh;
-      transform: rotate(-25deg) translateX(-230%);
+      width: 270vw;
+      height: 270vh;
       will-change: transform;
     }
 
+    /* Blade 1 (Crimson Red): Slices in from top-left, exits bottom-right */
     .wipe-blade.blade-red {
-      background: var(--p5-red);
+      background: linear-gradient(135deg, var(--p5-red-bright) 0%, var(--p5-red-dark) 100%);
       z-index: 2;
+      transform: rotate(-24deg) translateX(-220%);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
     }
 
+    /* Blade 2 (Obsidian Black): Counter-slices from bottom-right, exits top-left */
     .wipe-blade.blade-black {
       background: var(--p5-black);
       z-index: 3;
-      border-right: 6px solid var(--p5-yellow);
-      box-shadow: 14px 0 40px rgba(0, 0, 0, 0.98);
+      transform: rotate(-24deg) translateX(220%);
+      border-left: 6px solid var(--p5-yellow);
+      box-shadow: -15px 0 45px rgba(0, 0, 0, 0.98);
     }
 
+    /* Golden Energy Cutting Seam */
     .wipe-slash-line {
       position: absolute;
       width: 300vw;
-      height: 8px;
+      height: 10px;
       background: var(--p5-yellow);
-      box-shadow: 0 0 16px var(--p5-yellow), 0 0 32px var(--p5-red);
-      transform: rotate(-25deg) translateX(-230%);
+      box-shadow: 0 0 20px var(--p5-yellow), 0 0 40px var(--p5-red);
+      transform: rotate(-24deg) scaleX(0);
       z-index: 4;
       pointer-events: none;
-      will-change: transform;
+      will-change: transform, opacity;
     }
 
-    /* Phase 1: Wipe In */
+    /* Comic Spark Stars */
+    .wipe-spark-star {
+      position: absolute;
+      font-size: 3rem;
+      color: var(--p5-yellow);
+      text-shadow: 3px 3px 0 var(--p5-black), 0 0 15px var(--p5-yellow);
+      z-index: 7;
+      opacity: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    .wipe-spark-star.spark-1 {
+      top: 38%;
+      left: 45%;
+    }
+    .wipe-spark-star.spark-2 {
+      bottom: 40%;
+      right: 44%;
+    }
+
+    /* Phase 1: Dual Counter-Slash Slices In */
     #slash-wipe.phase-in .blade-red {
-      animation: p5BladeSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: p5RedSliceIn 0.22s cubic-bezier(0.12, 0.9, 0.25, 1) forwards;
     }
     #slash-wipe.phase-in .blade-black {
-      animation: p5BladeSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.03s forwards;
+      animation: p5BlackSliceIn 0.22s cubic-bezier(0.12, 0.9, 0.25, 1) forwards;
     }
     #slash-wipe.phase-in .wipe-slash-line {
-      animation: p5BladeSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.02s forwards;
+      animation: p5SeamFlashIn 0.22s ease-out forwards;
     }
 
-    /* Phase 2: Wipe Out */
+    /* Phase 2: Dual Counter-Slash Slices Out in Opposing Directions */
     #slash-wipe.phase-out .blade-red {
-      animation: p5BladeSlideOut 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: p5RedSliceOut 0.22s cubic-bezier(0.8, 0, 0.2, 1) forwards;
     }
     #slash-wipe.phase-out .blade-black {
-      animation: p5BladeSlideOut 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: p5BlackSliceOut 0.22s cubic-bezier(0.8, 0, 0.2, 1) forwards;
     }
     #slash-wipe.phase-out .wipe-slash-line {
-      animation: p5BladeSlideOut 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: p5SeamFlashOut 0.18s ease-out forwards;
     }
 
-    @keyframes p5BladeSlideIn {
-      0% {
-        transform: rotate(-25deg) translateX(-230%);
-      }
-      100% {
-        transform: rotate(-25deg) translateX(0%);
-      }
+    @keyframes p5RedSliceIn {
+      0% { transform: rotate(-24deg) translateX(-220%); }
+      100% { transform: rotate(-24deg) translateX(0%); }
+    }
+    @keyframes p5RedSliceOut {
+      0% { transform: rotate(-24deg) translateX(0%); }
+      100% { transform: rotate(-24deg) translateX(220%); }
     }
 
-    @keyframes p5BladeSlideOut {
-      0% {
-        transform: rotate(-25deg) translateX(0%);
-      }
-      100% {
-        transform: rotate(-25deg) translateX(230%);
-      }
+    @keyframes p5BlackSliceIn {
+      0% { transform: rotate(-24deg) translateX(220%); }
+      100% { transform: rotate(-24deg) translateX(0%); }
+    }
+    @keyframes p5BlackSliceOut {
+      0% { transform: rotate(-24deg) translateX(0%); }
+      100% { transform: rotate(-24deg) translateX(-220%); }
     }
 
-    /* Slash Graphic Text Cut-in */
+    @keyframes p5SeamFlashIn {
+      0% { transform: rotate(-24deg) scaleX(0); opacity: 0; }
+      80% { transform: rotate(-24deg) scaleX(1); opacity: 1; }
+      100% { transform: rotate(-24deg) scaleX(1); opacity: 0.8; }
+    }
+    @keyframes p5SeamFlashOut {
+      0% { transform: rotate(-24deg) scaleX(1); opacity: 0.8; }
+      100% { transform: rotate(-24deg) scaleX(0); opacity: 0; }
+    }
+
+    /* Cut-in Badge with Hit-Stop Shake */
     .wipe-cutin-text {
       position: absolute;
       z-index: 6;
       font-family: var(--font-headline);
-      font-size: clamp(2.2rem, 6.5vw, 5rem);
+      font-size: clamp(2.2rem, 6.5vw, 5.2rem);
       color: var(--p5-black);
       background: var(--p5-yellow);
-      padding: 10px 36px;
+      padding: 10px 42px;
       transform: rotate(-12deg) scale(0);
-      box-shadow: 10px 10px 0 var(--p5-black);
+      box-shadow: 12px 12px 0 var(--p5-black);
       letter-spacing: 3px;
       pointer-events: none;
       text-transform: uppercase;
@@ -304,21 +353,53 @@
     }
 
     #slash-wipe.phase-in .wipe-cutin-text {
-      animation: p5CutinPopIn 0.24s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.05s forwards;
+      animation: p5CutinHitStop 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
     #slash-wipe.phase-out .wipe-cutin-text {
-      animation: p5CutinPopOut 0.16s ease-out forwards;
+      animation: p5CutinBurstOut 0.16s ease-out forwards;
     }
 
-    @keyframes p5CutinPopIn {
-      0% { transform: rotate(-12deg) scale(0); }
-      100% { transform: rotate(-12deg) scale(1); }
+    #slash-wipe.phase-in .wipe-spark-star.spark-1 {
+      animation: p5StarBurst1 0.28s ease-out forwards;
+    }
+    #slash-wipe.phase-in .wipe-spark-star.spark-2 {
+      animation: p5StarBurst2 0.28s ease-out 0.04s forwards;
     }
 
-    @keyframes p5CutinPopOut {
-      0% { transform: rotate(-12deg) scale(1); }
-      100% { transform: rotate(-12deg) scale(0); }
+    @keyframes p5CutinHitStop {
+      0% {
+        transform: rotate(-16deg) scale(0.3) translate(-20px, 10px);
+        opacity: 0;
+      }
+      70% {
+        transform: rotate(-11deg) scale(1.12) translate(5px, -3px);
+        opacity: 1;
+      }
+      85% {
+        transform: rotate(-13deg) scale(0.98) translate(-3px, 2px);
+      }
+      100% {
+        transform: rotate(-12deg) scale(1) translate(0, 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes p5CutinBurstOut {
+      0% { transform: rotate(-12deg) scale(1); opacity: 1; }
+      100% { transform: rotate(-8deg) scale(1.25) translateY(-25px); opacity: 0; }
+    }
+
+    @keyframes p5StarBurst1 {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      50% { transform: scale(1.4) rotate(90deg) translate(-20px, -20px); opacity: 1; }
+      100% { transform: scale(1) rotate(180deg) translate(-40px, -35px); opacity: 0; }
+    }
+
+    @keyframes p5StarBurst2 {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      50% { transform: scale(1.5) rotate(-90deg) translate(20px, 20px); opacity: 1; }
+      100% { transform: scale(1) rotate(-180deg) translate(40px, 35px); opacity: 0; }
     }
 
     /* ==========================================================================
@@ -348,15 +429,15 @@
       pointer-events: all;
     }
 
-    .view-screen.active .section-stage,
-    .view-screen.active .home-main-layout {
-      animation: p5ViewEntrance 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Subtle TranslateY Entrance on view stages without overriding component skews */
+    .view-stage-reveal {
+      animation: p5SubtleEntrance 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes p5ViewEntrance {
+    @keyframes p5SubtleEntrance {
       0% {
-        opacity: 0.7;
-        transform: translateY(8px);
+        opacity: 0.55;
+        transform: translateY(22px);
       }
       100% {
         opacity: 1;
