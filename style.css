@@ -297,18 +297,18 @@ body.screen-recoil #app {
   background: var(--p5-black);
   z-index: 3;
   transform: rotate(-24deg) translateX(220%);
-  border-left: 6px solid var(--p5-white);
+  border-left: 6px solid var(--p5-yellow);
   box-shadow: -15px 0 45px rgba(0, 0, 0, 0.98);
 }
 
-/* White Energy Cutting Seam */
+/* Golden Energy Cutting Seam */
 .wipe-slash-line {
   position: absolute;
   width: 300vw;
   height: 10px;
-  background: var(--p5-white);
+  background: var(--p5-yellow);
   box-shadow:
-    0 0 20px rgba(255, 255, 255, 0.95),
+    0 0 20px var(--p5-yellow),
     0 0 40px var(--p5-red);
   transform: rotate(-24deg) scaleX(0);
   z-index: 4;
@@ -433,8 +433,7 @@ body.screen-recoil #app {
   font-family: var(--font-headline);
   font-size: clamp(2.2rem, 6.5vw, 5.2rem);
   color: var(--p5-black);
-  background: var(--p5-white);
-  border: 4px solid var(--p5-black);
+  background: var(--p5-yellow);
   padding: 10px 42px;
   transform: rotate(-12deg) scale(0);
   box-shadow: 12px 12px 0 var(--p5-black);
