@@ -2,602 +2,853 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Patrick Dureza</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Patrick Dureza // Phantom Dossier</title>
+    <!-- Google Fonts for Persona 5 styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Rajdhani:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "VT323", monospace;
-        background: linear-gradient(
-          135deg,
-          #000000 0%,
-          #0a1a0a 50%,
-          #000000 100%
-        );
-        background-color: #000000;
-        color: #00ff00;
-        text-shadow:
-          0 0 0.5px rgba(0, 255, 0, 0.9),
-          /* Very subtle, sharp base glow */ 1px 0 0 rgba(0, 255, 0, 0.4),
-          /* Reduced chromatic aberration opacity */ -1px 0 0
-            rgba(0, 255, 0, 0.4);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-
-      .retro-container {
-        background-color: #0a1a0a; /* Very dark green background for main container */
-        border: 4px solid #39ff14; /* Electric Green border for high contrast */
-        box-shadow:
-          0 0 15px #39ff14,
-          0 0 30px #39ff14,
-          inset 0 0 10px #39ff14; /* Intense electric green glow */
-        padding: 2.5rem;
-        border-radius: 12px;
-        max-width: 960px;
-        width: 100%;
-        box-sizing: border-box;
-        position: relative;
-        overflow: hidden;
-        animation: flicker 1.5s infinite alternate; /* Subtle flicker effect */
-
-        /* CRT Monitor Effects */
-        transform: perspective(1200px) rotateX(3deg) rotateY(-2deg); /* Slightly more pronounced 3D tilt */
-        transform-style: preserve-3d;
-        border-radius: 25px; /* Even more pronounced rounded corners for screen */
-        filter: brightness(1.15) contrast(1.15); /* Slightly increased brightness/contrast for better readability */
-      }
-
-      /* Scanline effect - now even more pronounced */
-      .retro-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: repeating-linear-gradient(
-          0deg,
-          rgba(0, 255, 0, 0.18) 0px,
-          /* Slightly reduced opacity for scanlines to improve readability */
-          rgba(0, 255, 0, 0.18) 1px,
-          transparent 1px,
-          transparent 2px
-        );
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      /* Vignette effect */
-      .retro-container::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.6); /* Reduced vignette intensity for better visibility */
-        border-radius: 25px; /* Match container border-radius */
-        pointer-events: none;
-        z-index: 2;
-      }
-
-      /* Screen Glare/Reflection Effect */
-      .retro-container .screen-glare {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background:
-          radial-gradient(
-            circle at 10% 10%,
-            rgba(255, 255, 255, 0.12),
-            transparent 50%
-          ),
-          /* Adjusted glare opacity */
-          radial-gradient(
-              circle at 90% 90%,
-              rgba(255, 255, 255, 0.06),
-              transparent 50%
-            ); /* Adjusted glare opacity */
-        pointer-events: none;
-        z-index: 3;
-        border-radius: 25px; /* Match container border-radius */
-      }
-
-      .retro-header,
-      .retro-section-title {
-        font-family: "Press Start 2P", cursive; /* Pixelated font for titles */
-        color: #66ff33; /* Lighter, vibrant green for titles */
-        text-shadow:
-          0 0 1px #66ff33,
-          0 0 15px #66ff33; /* Original glow for titles */
-        border-bottom: 2px dashed #00ff00; /* Neon Green dashed line */
-        padding-bottom: 0.75rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .retro-button {
-        background-color: #39ff14; /* Electric Green button */
-        color: #000000; /* Black text for maximum contrast */
-        padding: 0.75rem 1.5rem;
-        border-radius: 8px;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow:
-          0 0 10px #39ff14,
-          0 0 20px #39ff14; /* Original button glow */
-        transition: all 0.2s ease-in-out;
-        border: 2px solid #39ff14;
-        font-family:
-          "Press Start 2P", cursive; /* Apply pixel font to buttons too */
-        font-size: 0.875rem; /* Adjust font size for legibility */
-      }
-
-      .retro-button:hover {
-        background-color: #00ff00; /* Brighter Neon Green on hover */
-        color: #000000;
-        box-shadow:
-          0 0 15px #00ff00,
-          0 0 30px #00ff00; /* Original hover glow */
-        transform: translateY(-2px);
-        border-color: #00ff00;
-      }
-
-      .retro-card {
-        background-color: #1a2a1a; /* Slightly lighter dark green for card backgrounds */
-        border: 2px solid #00ff00; /* Neon Green border */
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow:
-          0 0 8px #00ff00,
-          inset 0 0 5px #00ff00; /* Original card glow */
-      }
-
-      .skill-tag {
-        background-color: #39ff14; /* Electric Green skill tag */
-        color: #000000; /* Black text for contrast */
-        padding: 0.3rem 0.75rem;
-        border-radius: 6px;
-        font-size: 0.875rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        box-shadow: 0 0 5px #39ff14; /* Original skill tag glow */
-        font-family:
-          "VT323", monospace; /* Apply monospace font to skill tags */
-      }
-
-      .work-item ul {
-        list-style: none; /* Remove default bullet points */
-        padding-left: 0;
-        margin-top: 0.5rem;
-      }
-
-      .work-item ul li::before {
-        content: "> "; /* Retro arrow bullet */
-        color: #00ff00; /* Green arrow */
-        font-weight: bold;
-        margin-right: 0.5rem;
-      }
-
-      /* Keyframes for flicker effect (color remains consistent) */
-      @keyframes flicker {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        5% {
-          opacity: 0.95;
-        }
-        10% {
-          opacity: 1;
-        }
-        15% {
-          opacity: 0.97;
-        }
-        20% {
-          opacity: 1;
-        }
-        25% {
-          opacity: 0.9;
-        }
-        30% {
-          opacity: 1;
-        }
-        35% {
-          opacity: 0.98;
-        }
-        40% {
-          opacity: 1;
-        }
-        45% {
-          opacity: 0.96;
-        }
-        50% {
-          opacity: 1;
-        }
-        55% {
-          opacity: 0.92;
-        }
-        60% {
-          opacity: 1;
-        }
-        65% {
-          opacity: 0.99;
-        }
-        70% {
-          opacity: 1;
-        }
-        75% {
-          opacity: 0.93;
-        }
-        80% {
-          opacity: 1;
-        }
-        85% {
-          opacity: 0.97;
-        }
-        90% {
-          opacity: 1;
-        }
-        95% {
-          opacity: 0.94;
-        }
-      }
-
-      /* Responsive adjustments */
-      @media (max-width: 768px) {
-        .retro-container {
-          padding: 1.5rem;
-          transform: perspective(800px) rotateX(1deg) rotateY(-1deg); /* Less pronounced tilt on smaller screens */
-        }
-        .retro-header h1 {
-          font-size: 2.25rem;
-        }
-        .retro-header p {
-          font-size: 1rem;
-        }
-        .retro-section-title {
-          font-size: 1.5rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .retro-container {
-          padding: 1rem;
-          border-width: 2px;
-          transform: none; /* No 3D tilt on very small screens */
-        }
-        .retro-header h1 {
-          font-size: 1.75rem;
-        }
-        .retro-header p {
-          font-size: 0.875rem;
-        }
-        .retro-section-title {
-          font-size: 1.25rem;
-        }
-        .retro-button {
-          padding: 0.6rem 1.2rem;
-          font-size: 0.8rem; /* Slightly smaller for mobile buttons */
-        }
-        .skill-tag {
-          font-size: 0.75rem; /* Slightly smaller for mobile skill tags */
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="flex items-center justify-center min-h-screen p-4 pb-20">
-    <div class="retro-container">
-      <!-- Screen Glare/Reflection Effect (placed inside container for correct positioning) -->
-      <div class="screen-glare"></div>
-
-      <!-- Header Section -->
-      <header class="retro-header text-center mb-8">
-        <div class="w-full">
-          <h1 class="text-4xl md:text-5xl font-bold uppercase mb-2">
-            Patrick Dureza
-          </h1>
-          <p class="text-xl md:text-2xl">Software Engineer</p>
-        </div>
-      </header>
-
-      <!-- About Me Section -->
-      <section class="mb-8">
-        <h2
-          class="retro-section-title text-2xl md:text-3xl font-bold uppercase"
-        >
-          ABOUT ME
-        </h2>
-        <p class="text-xl leading-relaxed text-gray-200">
-          I'm a software engineer with over a decade of experience in web
-          development. I've spent my career building and optimizing web user
-          interfaces, backend services, and high-performance e-commerce
-          platforms. I enjoy leading complex system migrations, streamlining
-          development workflows, and working with cross-functional engineering
-          teams. My goal is always to deliver features that improve user
-          experience, boost operational efficiency, and support scalable digital
-          growth.
-        </p>
-      </section>
-
-      <!-- Skills Section -->
-      <section class="mb-8">
-        <h2
-          class="retro-section-title text-2xl md:text-3xl font-bold uppercase"
-        >
-          SKILL MATRIX
-        </h2>
-        <div class="flex flex-wrap gap-3">
-          <span class="skill-tag">Go</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">Redux</span>
-          <span class="skill-tag">HTML</span>
-          <span class="skill-tag">CSS</span>
-          <span class="skill-tag">Javascript</span>
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">TailwindCSS</span>
-          <span class="skill-tag">Shadcn/UI</span>
-
-          <span class="skill-tag">REST</span>
-          <span class="skill-tag">GraphQL</span>
-          <span class="skill-tag">WebSockets</span>
-
-          <span class="skill-tag">Express.js</span>
-          <span class="skill-tag">Next.js</span>
-          <span class="skill-tag">Nx</span>
-
-          <span class="skill-tag">Jest</span>
-          <span class="skill-tag">Enzyme</span>
-          <span class="skill-tag">Cypress</span>
-
-          <span class="skill-tag">React Testing Library</span>
-
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">k8s</span>
-          <span class="skill-tag">Git</span>
-
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">DynamoDB</span>
-
-          <span class="skill-tag">AWS</span>
-          <span class="skill-tag">Vercel</span>
-          <span class="skill-tag">Heroku</span>
-
-          <span class="skill-tag">Datadog</span>
-          <span class="skill-tag">Grafana</span>
-        </div>
-      </section>
-
-      <!-- Work History Section -->
-      <section class="mb-8">
-        <h2
-          class="retro-section-title text-2xl md:text-3xl font-bold uppercase"
-        >
-          WORK HISTORY
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="retro-card work-item">
-            <h3 class="text-xl font-bold mb-1 text-[#66FF33]">
-              Sr. FullStack Engineer
-            </h3>
-            <p class="text-gray-400 text-sm mb-2">
-              foodpanda | July 2021 - Present
-            </p>
-            <ul class="text-gray-300 text-base">
-              <li>
-                Led development of loyalty & subscription features across
-                backend, web, and mobile, boosting GMV and customer
-                participation.
-              </li>
-              <li>
-                Drove loyalty team revamps and optimizations, achieving cost
-                savings, improved DX, and faster development.
-              </li>
-              <li>
-                Contributed to company-wide initiatives enhancing DX and
-                observability.
-              </li>
-            </ul>
-          </div>
-          <div class="retro-card work-item">
-            <h3 class="text-xl font-bold mb-1 text-[#66FF33]">
-              Lead Frontend Developer
-            </h3>
-            <p class="text-gray-400 text-sm mb-2">
-              tribe | July 2018 - July 2021
-            </p>
-            <ul class="text-gray-300 text-base">
-              <li>
-                Migrated tribe's old website to a new HubSpot website with
-                tracking and analytics.
-              </li>
-              <li>
-                Migrated tribe's old admin from RoR to a more modern React app.
-              </li>
-              <li>
-                Developed marketplace for brands to manage influencer marketing
-                and branded content.
-              </li>
-            </ul>
-          </div>
-          <div class="retro-card work-item">
-            <h3 class="text-xl font-bold mb-1 text-[#66FF33]">
-              Shopify Lead Developer
-            </h3>
-            <p class="text-gray-400 text-sm mb-2">
-              acidgreen | Nov 2017 - Jun 2018
-            </p>
-            <ul class="text-gray-300 text-base">
-              <li>Led a group of Shopify developers.</li>
-              <li>
-                Developed scalable workflows and developer tools to manage
-                project access and standardized estimation processes, supporting
-                team expansion.
-              </li>
-              <li>
-                Automated development workflows using Bitbucket pipelines.
-              </li>
-              <li>
-                Developed & customised high performance eCommerce websites.
-              </li>
-            </ul>
-          </div>
-          <div class="retro-card work-item">
-            <h3 class="text-xl font-bold mb-1 text-[#66FF33]">
-              Technical Consultant / E-commerce Developer
-            </h3>
-            <p class="text-gray-400 text-sm mb-2">
-              Moku Collective | Nov 2016 - Nov 2017
-            </p>
-            <p class="text-gray-400 text-sm mb-2">
-              Netsuite | Aug 2015 - Nov 2016
-            </p>
-            <ul class="text-gray-300 text-base">
-              <li>Advised clients on bespoke eCommerce solutions.</li>
-              <li>Built and optimized high-performance eCommerce websites.</li>
-            </ul>
-          </div>
-          <div class="retro-card work-item">
-            <h3 class="text-xl font-bold mb-1 text-[#66FF33]">
-              Software Engineer
-            </h3>
-            <p class="text-gray-400 text-sm mb-2">
-              Pointwest (Delta Airlines) | Jun 2011 - Aug 2015
-            </p>
-            <ul class="text-gray-300 text-base">
-              <li>
-                Developed post-purchase features (SkyMiles management, Stored
-                Payments, etc.).
-              </li>
-              <li>Facilitated the offshore development team (US-based).</li>
-              <li>Built and optimized high-performance eCommerce websites.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Personal Projects -->
-      <section class="mb-8">
-        <h2
-          class="retro-section-title text-2xl md:text-3xl font-bold uppercase"
-        >
-          PERSONAL PROJECTS
-        </h2>
-
-        <div class="retro-card">
-          <h3 class="text-xl font-bold mb-2 text-[#66FF33]">Paiseh-pay</h3>
-          <div class="sm:flex sm:gap-2 justify-between">
-            <p class="text-gray-300 mb-3">
-              An app for accurately splitting the bill between SG friends!
-              Itemize the bill and assign payable items for each person.
-            </p>
-            <a
-              href="https://paiseh-pay.vercel.app/"
-              target="_blank"
-              class="retro-button text-sm shrink-0 h-fit inline-block"
-              >Split bills</a
-            >
-          </div>
-        </div>
-
-        <div class="retro-card">
-          <h3 class="text-xl font-bold mb-2 text-[#66FF33]">
-            Game Jam Entry: Potion Commotion
-          </h3>
-          <div class="sm:flex sm:gap-2 justify-between">
-            <p class="text-gray-300 mb-3">
-              Developed a retro-inspired rhythm game for a gamejam, showcasing
-              skills in game design, development, pixel art and collaboration
-              with friends. :D
-            </p>
-            <a
-              href="https://itch.io/jam/brackeys-13/rate/3338335"
-              target="_blank"
-              class="retro-button text-sm shrink-0 h-fit inline-block"
-              >Play Game</a
-            >
-          </div>
-        </div>
-
-        <!-- <div class="retro-card">
-          <h3 class="text-xl font-bold mb-2 text-[#66FF33]">D&D GM AI</h3>
-          <div class="sm:flex sm:gap-2 justify-between">
-            <p class="text-gray-300 mb-3">
-              Created a Dungeons & Dragons GM chat using OpenAPI
-            </p>
-            <a
-              href="https://dnd-ai-gm.vercel.app/"
-              target="_blank"
-              class="retro-button text-sm shrink-0 h-fit inline-block"
-              >Play Game</a
-            >
-          </div>
-        </div> -->
-      </section>
-
-      <!-- Contact Section -->
-      <section class="mb-8">
-        <h2
-          class="retro-section-title text-2xl md:text-3xl font-bold uppercase"
-        >
-          CONNECT
-        </h2>
-        <div class="text-xl text-gray-200">
-          <p class="mb-2">
-            GitHub:
-            <a
-              href="http://github.com/pgdureza"
-              target="_blank"
-              class="text-[#66FF33] hover:underline"
-              >pgdureza</a
-            >
-          </p>
-          <p class="mb-2">
-            LinkedIn:
-            <a
-              href="https://www.linkedin.com/in/tikdureza/"
-              target="_blank"
-              class="text-[#66FF33] hover:underline"
-              >tikdureza</a
-            >
-          </p>
-          <p class="mb-2">
-            itch.io:
-            <a
-              href="https://tekdureza.itch.io/"
-              target="_blank"
-              class="text-[#66FF33] hover:underline"
-              >tekdureza</a
-            >
-          </p>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer
-        class="text-center text-sm text-gray-400 mt-8 pt-4 border-t-2 border-dashed border-[#006400]"
-      >
-        <p>// TRANSMISSION END //</p>
-      </footer>
+  <body>
+    <!-- ========================================================================
+       BACKGROUND CANVAS (ANIMATED AMBIENT P5 ART)
+       ======================================================================== -->
+    <div id="bg-canvas">
+      <div class="bg-halftone"></div>
+      <div class="bg-red-wedge">
+        <div class="bg-stripes"></div>
+      </div>
+      <!-- Persona 5 Ambience Stars -->
+      <div class="bg-star star-1">★</div>
+      <div class="bg-star star-2">★</div>
+      <div class="bg-star star-3">★</div>
+      <div class="bg-star star-4">★</div>
+      <!-- Large Background Typography -->
+      <div class="bg-watermark">PHANTOM</div>
     </div>
+
+    <!-- ========================================================================
+       HUD ELEMENTS: TAKE YOUR TIME
+       ======================================================================== -->
+    <div class="hud-take-time">
+      <div class="take-time-badge">TAKE YOUR TIME</div>
+      <div class="take-time-hat">★</div>
+    </div>
+
+    <!-- ========================================================================
+       SCREEN WIPE OVERLAY (HIGH-ENERGY SLASH TRANSITION)
+       ======================================================================== -->
+    <div id="slash-wipe" aria-hidden="true">
+      <div class="wipe-blade blade-red"></div>
+      <div class="wipe-blade blade-black"></div>
+      <div class="wipe-slash-line"></div>
+      <div class="wipe-cutin-text" id="cutin-text">ALL-OUT ATTACK!!</div>
+    </div>
+
+    <!-- ========================================================================
+       MAIN APPLICATION CONTAINER
+       ======================================================================== -->
+    <main id="app">
+      <!-- ======================================================================
+         VIEW 0: HOME SCREEN / MAIN COMMAND MENU
+         ====================================================================== -->
+      <section id="view-home" class="view-screen active" aria-label="Main Menu">
+        <!-- Top-Right Dynamic Date Stamp (Home Screen Only) -->
+        <div class="hud-calendar">
+          <div class="calendar-badge" id="hud-date">OCT 19 MON</div>
+        </div>
+
+        <div class="home-main-layout">
+          <!-- Left Column: Header & Menu -->
+          <div class="home-content-col">
+            <!-- Hero Header with Persona 5 Ransom Lettering -->
+            <header class="hero-header">
+              <div class="hero-name-container">
+                <span class="ransom-box black">PATRICK</span>
+                <span class="ransom-box white">DUREZA</span>
+                <span class="ransom-box red">★</span>
+              </div>
+              <p class="hero-subtitle">SR. FULLSTACK ENGINEER</p>
+            </header>
+
+            <!-- Main Navigation Menu Slats -->
+            <nav aria-label="Persona Navigation">
+              <ul class="p5-menu-list">
+                <!-- 01. ABOUT ME -->
+                <li
+                  class="p5-menu-item"
+                  tabindex="0"
+                  role="button"
+                  data-target="view-about"
+                  aria-label="About Me"
+                >
+                  <div class="p5-menu-btn">
+                    <span class="menu-index">01</span>
+                    <span class="menu-label">ABOUT ME</span>
+                    <span class="menu-sublabel">CONFIDANT DOSSIER</span>
+                    <span class="menu-slash-deco">►►</span>
+                  </div>
+                </li>
+
+                <!-- 02. SKILL MATRIX -->
+                <li
+                  class="p5-menu-item"
+                  tabindex="0"
+                  role="button"
+                  data-target="view-skills"
+                  aria-label="Skill Matrix"
+                >
+                  <div class="p5-menu-btn">
+                    <span class="menu-index">02</span>
+                    <span class="menu-label">SKILL MATRIX</span>
+                    <span class="menu-sublabel">PERSONA AFFINITIES</span>
+                    <span class="menu-slash-deco">►►</span>
+                  </div>
+                </li>
+
+                <!-- 03. WORK HISTORY -->
+                <li
+                  class="p5-menu-item"
+                  tabindex="0"
+                  role="button"
+                  data-target="view-history"
+                  aria-label="Work History"
+                >
+                  <div class="p5-menu-btn">
+                    <span class="menu-index">03</span>
+                    <span class="menu-label">WORK HISTORY</span>
+                    <span class="menu-sublabel">PALACE INFILTRATION</span>
+                    <span class="menu-slash-deco">►►</span>
+                  </div>
+                </li>
+
+                <!-- 04. PERSONAL PROJECTS -->
+                <li
+                  class="p5-menu-item"
+                  tabindex="0"
+                  role="button"
+                  data-target="view-projects"
+                  aria-label="Personal Projects"
+                >
+                  <div class="p5-menu-btn">
+                    <span class="menu-index">04</span>
+                    <span class="menu-label">PERSONAL PROJECTS</span>
+                    <span class="menu-sublabel">TREASURES SECURED</span>
+                    <span class="menu-slash-deco">►►</span>
+                  </div>
+                </li>
+
+                <!-- 05. CONNECT -->
+                <li
+                  class="p5-menu-item"
+                  tabindex="0"
+                  role="button"
+                  data-target="view-connect"
+                  aria-label="Connect"
+                >
+                  <div class="p5-menu-btn">
+                    <span class="menu-index">05</span>
+                    <span class="menu-label">CONNECT</span>
+                    <span class="menu-sublabel">CALLING CARD</span>
+                    <span class="menu-slash-deco">►►</span>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+
+            <!-- Keybind Hint Bar -->
+            <footer class="menu-hint-bar">
+              <span class="key-badge">1 - 5</span>
+              <span class="hint-text">SELECT OPTION</span>
+              <span class="key-badge">CLICK</span>
+              <span class="hint-text">COMMENCE OPERATION</span>
+            </footer>
+          </div>
+
+          <!-- Right Column: Persona 5 Protagonist Cutout Card -->
+          <div class="home-portrait-col" aria-hidden="true">
+            <div class="home-avatar-card">
+              <div class="avatar-backdrop-card"></div>
+              <div class="avatar-frame">
+                <img
+                  src="me.jpg"
+                  alt="Patrick Dureza"
+                  class="home-avatar-img"
+                />
+                <div class="avatar-scanline"></div>
+                <div class="avatar-tag">COGNITION // LVL 99</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+         VIEW 1: ABOUT ME ("CONFIDANT DOSSIER")
+         ====================================================================== -->
+      <section id="view-about" class="view-screen" aria-label="About Me">
+        <div class="section-stage">
+          <header class="section-hud-header">
+            <div class="section-title-wrap">
+              <div class="section-category-tag">
+                CONFIDANT // ARCANA: THE HERMIT
+              </div>
+              <h1 class="section-main-title"><span>ABOUT ME</span></h1>
+            </div>
+            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+              <span class="back-circle">✕</span> CANCEL [ESC]
+            </button>
+          </header>
+
+          <div class="section-content-viewport">
+            <div class="about-grid">
+              <!-- Left Character Dossier -->
+              <div class="dossier-card">
+                <div class="dossier-header">PHANTOM DOSSIER</div>
+                <div class="dossier-portrait">
+                  <img
+                    src="me.jpg"
+                    alt="Patrick Dureza"
+                    class="dossier-portrait-img"
+                  />
+                  <div class="portrait-rank">RANK MAX</div>
+                </div>
+                <div class="dossier-stats">
+                  <div class="stat-row">
+                    <span class="stat-label">NAME</span>
+                    <span class="stat-val">PATRICK DUREZA</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-label">CLASS</span>
+                    <span class="stat-val">SR. FULLSTACK ENG</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-label">EXPERIENCE</span>
+                    <span class="stat-val">10+ YEARS</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-label">BASE</span>
+                    <span class="stat-val">SINGAPORE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Dialogue Box with Bio Text -->
+              <div class="bio-dialog-card">
+                <div class="dialog-nameplate">PATRICK DUREZA</div>
+                <div class="bio-lead">
+                  "I TRANSFORM COMPLEX SYSTEMS INTO STREAMLINED DIGITAL
+                  REALITIES."
+                </div>
+                <p class="bio-body-text">
+                  I'm a software engineer with over a decade of experience in
+                  web development. I've spent my career building and optimizing
+                  web user interfaces, backend services, and high-performance
+                  e-commerce platforms. I enjoy leading complex system
+                  migrations, streamlining development workflows, and working
+                  with cross-functional engineering teams. My goal is always to
+                  deliver features that improve user experience, boost
+                  operational efficiency, and support scalable digital growth.
+                </p>
+                <div class="bio-chips">
+                  <span class="bio-chip">⚡ ARCHITECTURAL LEADERSHIP</span>
+                  <span class="bio-chip">⚔ SYSTEM MIGRATIONS</span>
+                  <span class="bio-chip">★ HIGH-PERFORMANCE WEB</span>
+                  <span class="bio-chip">🛡 DX & OBSERVABILITY</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <nav class="quick-nav-bar" aria-label="Section shortcuts">
+            <button class="quick-nav-pill js-back-btn">MENU</button>
+            <button class="quick-nav-pill active" data-target="view-about">
+              ABOUT
+            </button>
+            <button class="quick-nav-pill" data-target="view-skills">
+              SKILLS
+            </button>
+            <button class="quick-nav-pill" data-target="view-history">
+              HISTORY
+            </button>
+            <button class="quick-nav-pill" data-target="view-projects">
+              PROJECTS
+            </button>
+            <button class="quick-nav-pill" data-target="view-connect">
+              CONNECT
+            </button>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+         VIEW 2: SKILL MATRIX ("PERSONA AFFINITIES")
+         ====================================================================== -->
+      <section id="view-skills" class="view-screen" aria-label="Skill Matrix">
+        <div class="section-stage">
+          <header class="section-hud-header">
+            <div class="section-title-wrap">
+              <div class="section-category-tag">
+                COGNITIVE ABILITIES // ELEMENTAL AFFINITIES
+              </div>
+              <h1 class="section-main-title"><span>SKILL MATRIX</span></h1>
+            </div>
+            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+              <span class="back-circle">✕</span> CANCEL [ESC]
+            </button>
+          </header>
+
+          <div class="section-content-viewport">
+            <div class="affinity-groups-container">
+              <!-- 1. CORE / LANGUAGES -->
+              <div class="affinity-group">
+                <div class="affinity-header">
+                  <span class="element-icon">⚔️</span>
+                  <span class="element-title">CORE LANGUAGES & RUNTIMES</span>
+                </div>
+                <div class="affinity-badge-cluster">
+                  <span class="p5-skill-badge accent" style="--rot: -2deg"
+                    >Go</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: 1.5deg"
+                    >TypeScript</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -1deg"
+                    >Javascript</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: 2deg"
+                    >Node.js</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -1.5deg"
+                    >Java</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1deg">HTML</span>
+                  <span class="p5-skill-badge" style="--rot: -2deg">CSS</span>
+                </div>
+              </div>
+
+              <!-- 2. FRONTEND -->
+              <div class="affinity-group">
+                <div class="affinity-header">
+                  <span class="element-icon">🔥</span>
+                  <span class="element-title"
+                    >FRONTEND ARCHITECTURE & FRAMEWORKS</span
+                  >
+                </div>
+                <div class="affinity-badge-cluster">
+                  <span class="p5-skill-badge accent" style="--rot: 2deg"
+                    >React</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: -1.5deg"
+                    >Next.js</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1deg">Redux</span>
+                  <span class="p5-skill-badge" style="--rot: -2deg"
+                    >TailwindCSS</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1.5deg"
+                    >Shadcn/UI</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -1deg">Nx</span>
+                </div>
+              </div>
+
+              <!-- 3. BACKEND & APIS -->
+              <div class="affinity-group">
+                <div class="affinity-header">
+                  <span class="element-icon">❄️</span>
+                  <span class="element-title"
+                    >BACKEND SERVICES & API PROTOCOLS</span
+                  >
+                </div>
+                <div class="affinity-badge-cluster">
+                  <span class="p5-skill-badge accent" style="--rot: -1.5deg"
+                    >REST</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: 2deg"
+                    >GraphQL</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -2deg"
+                    >WebSockets</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1deg"
+                    >Express.js</span
+                  >
+                </div>
+              </div>
+
+              <!-- 4. INFRA & CLOUD -->
+              <div class="affinity-group">
+                <div class="affinity-header">
+                  <span class="element-icon">⚡</span>
+                  <span class="element-title">DEVOPS, CLOUD & PLATFORMS</span>
+                </div>
+                <div class="affinity-badge-cluster">
+                  <span class="p5-skill-badge accent" style="--rot: 1.5deg"
+                    >Docker</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: -2deg"
+                    >k8s</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1deg">AWS</span>
+                  <span class="p5-skill-badge" style="--rot: -1.5deg">Git</span>
+                  <span class="p5-skill-badge" style="--rot: 2deg">Vercel</span>
+                  <span class="p5-skill-badge" style="--rot: -1deg"
+                    >Heroku</span
+                  >
+                </div>
+              </div>
+
+              <!-- 5. DATA & MONITORING -->
+              <div class="affinity-group">
+                <div class="affinity-header">
+                  <span class="element-icon">🌪️</span>
+                  <span class="element-title">DATABASES & OBSERVABILITY</span>
+                </div>
+                <div class="affinity-badge-cluster">
+                  <span class="p5-skill-badge accent" style="--rot: -2deg"
+                    >PostgreSQL</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1.5deg"
+                    >MySQL</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -1deg"
+                    >DynamoDB</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: 2deg"
+                    >Datadog</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -1.5deg"
+                    >Grafana</span
+                  >
+                </div>
+              </div>
+
+              <!-- 6. QA & TESTING -->
+              <div class="affinity-group">
+                <div class="affinity-header">
+                  <span class="element-icon">🛡️</span>
+                  <span class="element-title">TESTING & VERIFICATION</span>
+                </div>
+                <div class="affinity-badge-cluster">
+                  <span class="p5-skill-badge accent" style="--rot: 1deg"
+                    >Jest</span
+                  >
+                  <span class="p5-skill-badge accent" style="--rot: -2deg"
+                    >React Testing Library</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: 1.5deg"
+                    >Cypress</span
+                  >
+                  <span class="p5-skill-badge" style="--rot: -1deg"
+                    >Enzyme</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <nav class="quick-nav-bar" aria-label="Section shortcuts">
+            <button class="quick-nav-pill js-back-btn">MENU</button>
+            <button class="quick-nav-pill" data-target="view-about">
+              ABOUT
+            </button>
+            <button class="quick-nav-pill active" data-target="view-skills">
+              SKILLS
+            </button>
+            <button class="quick-nav-pill" data-target="view-history">
+              HISTORY
+            </button>
+            <button class="quick-nav-pill" data-target="view-projects">
+              PROJECTS
+            </button>
+            <button class="quick-nav-pill" data-target="view-connect">
+              CONNECT
+            </button>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+         VIEW 3: WORK HISTORY ("PALACE INFILTRATION")
+         ====================================================================== -->
+      <section id="view-history" class="view-screen" aria-label="Work History">
+        <div class="section-stage">
+          <header class="section-hud-header">
+            <div class="section-title-wrap">
+              <div class="section-category-tag">
+                MISSION ARCHIVE // PALACE INFILTRATION LOG
+              </div>
+              <h1 class="section-main-title"><span>WORK HISTORY</span></h1>
+            </div>
+            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+              <span class="back-circle">✕</span> CANCEL [ESC]
+            </button>
+          </header>
+
+          <div class="section-content-viewport">
+            <div class="history-timeline">
+              <!-- 1. foodpanda -->
+              <article class="mission-card">
+                <div class="mission-stamp">INFILTRATED</div>
+                <h2 class="mission-role">
+                  <span class="mission-role-badge">ACTIVE</span>
+                  Sr. FullStack Engineer
+                </h2>
+                <div class="mission-company-date">
+                  <span>foodpanda</span>
+                  <span>//</span>
+                  <span>JULY 2021 - PRESENT</span>
+                </div>
+                <ul class="mission-bullets">
+                  <li>
+                    Led development of loyalty & subscription features across
+                    backend, web, and mobile, boosting GMV and customer
+                    participation.
+                  </li>
+                  <li>
+                    Drove loyalty team revamps and optimizations, achieving cost
+                    savings, improved DX, and faster development.
+                  </li>
+                  <li>
+                    Contributed to company-wide initiatives enhancing DX and
+                    observability.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- 2. tribe -->
+              <article class="mission-card">
+                <div class="mission-stamp">SECURED</div>
+                <h2 class="mission-role">
+                  <span class="mission-role-badge">COMPLETE</span>
+                  Lead Frontend Developer
+                </h2>
+                <div class="mission-company-date">
+                  <span>tribe</span>
+                  <span>//</span>
+                  <span>JULY 2018 - JULY 2021</span>
+                </div>
+                <ul class="mission-bullets">
+                  <li>
+                    Migrated tribe's old website to a new HubSpot website with
+                    tracking and analytics.
+                  </li>
+                  <li>
+                    Migrated tribe's old admin from RoR to a more modern React
+                    app.
+                  </li>
+                  <li>
+                    Developed marketplace for brands to manage influencer
+                    marketing and branded content.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- 3. acidgreen -->
+              <article class="mission-card">
+                <div class="mission-stamp">SECURED</div>
+                <h2 class="mission-role">
+                  <span class="mission-role-badge">COMPLETE</span>
+                  Shopify Lead Developer
+                </h2>
+                <div class="mission-company-date">
+                  <span>acidgreen</span>
+                  <span>//</span>
+                  <span>NOV 2017 - JUN 2018</span>
+                </div>
+                <ul class="mission-bullets">
+                  <li>Led a group of Shopify developers.</li>
+                  <li>
+                    Developed scalable workflows and developer tools to manage
+                    project access and standardized estimation processes,
+                    supporting team expansion.
+                  </li>
+                  <li>
+                    Automated development workflows using Bitbucket pipelines.
+                  </li>
+                  <li>
+                    Developed & customised high performance eCommerce websites.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- 4. Moku Collective & Netsuite -->
+              <article class="mission-card">
+                <div class="mission-stamp">SECURED</div>
+                <h2 class="mission-role">
+                  <span class="mission-role-badge">COMPLETE</span>
+                  Technical Consultant / E-commerce Developer
+                </h2>
+                <div class="mission-company-date">
+                  <span>Moku Collective & Netsuite</span>
+                  <span>//</span>
+                  <span>NOV 2016 - NOV 2017 & AUG 2015 - NOV 2016</span>
+                </div>
+                <ul class="mission-bullets">
+                  <li>Advised clients on bespoke eCommerce solutions.</li>
+                  <li>
+                    Built and optimized high-performance eCommerce websites.
+                  </li>
+                </ul>
+              </article>
+
+              <!-- 5. Pointwest (Delta Airlines) -->
+              <article class="mission-card">
+                <div class="mission-stamp">SECURED</div>
+                <h2 class="mission-role">
+                  <span class="mission-role-badge">COMPLETE</span>
+                  Software Engineer
+                </h2>
+                <div class="mission-company-date">
+                  <span>Pointwest (Delta Airlines)</span>
+                  <span>//</span>
+                  <span>JUN 2011 - AUG 2015</span>
+                </div>
+                <ul class="mission-bullets">
+                  <li>
+                    Developed post-purchase features (SkyMiles management,
+                    Stored Payments, etc.).
+                  </li>
+                  <li>Facilitated the offshore development team (US-based).</li>
+                  <li>
+                    Built and optimized high-performance eCommerce websites.
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <nav class="quick-nav-bar" aria-label="Section shortcuts">
+            <button class="quick-nav-pill js-back-btn">MENU</button>
+            <button class="quick-nav-pill" data-target="view-about">
+              ABOUT
+            </button>
+            <button class="quick-nav-pill" data-target="view-skills">
+              SKILLS
+            </button>
+            <button class="quick-nav-pill active" data-target="view-history">
+              HISTORY
+            </button>
+            <button class="quick-nav-pill" data-target="view-projects">
+              PROJECTS
+            </button>
+            <button class="quick-nav-pill" data-target="view-connect">
+              CONNECT
+            </button>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+         VIEW 4: PERSONAL PROJECTS ("TREASURE VAULT")
+         ====================================================================== -->
+      <section
+        id="view-projects"
+        class="view-screen"
+        aria-label="Personal Projects"
+      >
+        <div class="section-stage">
+          <header class="section-hud-header">
+            <div class="section-title-wrap">
+              <div class="section-category-tag">
+                TREASURE VAULT // ACQUIRED ARTIFACTS
+              </div>
+              <h1 class="section-main-title"><span>PERSONAL PROJECTS</span></h1>
+            </div>
+            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+              <span class="back-circle">✕</span> CANCEL [ESC]
+            </button>
+          </header>
+
+          <div class="section-content-viewport">
+            <div class="projects-grid">
+              <!-- 1. Paiseh-pay -->
+              <article class="project-card">
+                <div class="project-corner-tag">WEB UTILITY</div>
+                <h2 class="project-title">PAISEH-PAY</h2>
+                <p class="project-desc">
+                  An app for accurately splitting the bill between SG friends!
+                  Itemize the bill and assign payable items for each person with
+                  zero awkwardness.
+                </p>
+                <a
+                  href="https://paiseh-pay.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-action-btn"
+                >
+                  <span>SPLIT BILLS</span> <span>►</span>
+                </a>
+              </article>
+
+              <!-- 2. Potion Commotion -->
+              <article class="project-card">
+                <div class="project-corner-tag">GAME JAM ENTRY</div>
+                <h2 class="project-title">POTION COMMOTION</h2>
+                <p class="project-desc">
+                  Developed a retro-inspired rhythm game for Brackeys Game Jam
+                  13, showcasing skills in game design, gameplay programming,
+                  pixel art, and creative collaboration with friends! :D
+                </p>
+                <a
+                  href="https://itch.io/jam/brackeys-13/rate/3338335"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-action-btn"
+                >
+                  <span>PLAY GAME</span> <span>►</span>
+                </a>
+              </article>
+
+              <!-- 3. D&D GM AI -->
+              <!-- <article class="project-card">
+                <div class="project-corner-tag">AI EXPERIMENT</div>
+                <h2 class="project-title">D&D GM AI</h2>
+                <p class="project-desc">
+                  An autonomous Dungeons & Dragons Game Master conversational
+                  companion created with OpenAI APIs, providing immersive
+                  dynamic table-top narratives on the fly.
+                </p>
+                <a
+                  href="https://dnd-ai-gm.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-action-btn"
+                >
+                  <span>ENTER CAMPAIGN</span> <span>►</span>
+                </a>
+              </article> -->
+            </div>
+          </div>
+
+          <nav class="quick-nav-bar" aria-label="Section shortcuts">
+            <button class="quick-nav-pill js-back-btn">MENU</button>
+            <button class="quick-nav-pill" data-target="view-about">
+              ABOUT
+            </button>
+            <button class="quick-nav-pill" data-target="view-skills">
+              SKILLS
+            </button>
+            <button class="quick-nav-pill" data-target="view-history">
+              HISTORY
+            </button>
+            <button class="quick-nav-pill active" data-target="view-projects">
+              PROJECTS
+            </button>
+            <button class="quick-nav-pill" data-target="view-connect">
+              CONNECT
+            </button>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+         VIEW 5: CONNECT ("CALLING CARD")
+         ====================================================================== -->
+      <section id="view-connect" class="view-screen" aria-label="Connect">
+        <div class="section-stage">
+          <header class="section-hud-header">
+            <div class="section-title-wrap">
+              <div class="section-category-tag">
+                PHANTOM THIEVES // DISPATCH NOTICE
+              </div>
+              <h1 class="section-main-title"><span>CONNECT</span></h1>
+            </div>
+            <button class="p5-back-btn js-back-btn" aria-label="Return to menu">
+              <span class="back-circle">✕</span> CANCEL [ESC]
+            </button>
+          </header>
+
+          <div class="section-content-viewport">
+            <div class="calling-card-wrapper">
+              <div class="calling-card-flair">CALLING CARD</div>
+              <h2 class="calling-card-title">SIR / MADAM, DISPATCH NOTICE:</h2>
+              <p class="calling-card-message">
+                "We know you are seeking an experienced engineer capable of
+                spearheading complex architectures and elevating digital user
+                experiences. Whether you wish to build high-scale web platforms
+                or collaborate on visionary ideas, send your transmission now."
+              </p>
+
+              <div class="connect-links-grid">
+                <!-- GitHub -->
+                <a
+                  href="http://github.com/pgdureza"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="connect-channel-btn"
+                >
+                  <div class="channel-icon">GH</div>
+                  <div class="channel-meta">
+                    <span class="channel-label">GITHUB ARCHIVE</span>
+                    <span class="channel-handle">pgdureza</span>
+                  </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a
+                  href="https://www.linkedin.com/in/tikdureza/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="connect-channel-btn"
+                >
+                  <div class="channel-icon">IN</div>
+                  <div class="channel-meta">
+                    <span class="channel-label">LINKEDIN NETWORK</span>
+                    <span class="channel-handle">tikdureza</span>
+                  </div>
+                </a>
+
+                <!-- itch.io -->
+                <a
+                  href="https://tekdureza.itch.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="connect-channel-btn"
+                >
+                  <div class="channel-icon">🎮</div>
+                  <div class="channel-meta">
+                    <span class="channel-label">ITCH.IO CREATIONS</span>
+                    <span class="channel-handle">tekdureza</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <nav class="quick-nav-bar" aria-label="Section shortcuts">
+            <button class="quick-nav-pill js-back-btn">MENU</button>
+            <button class="quick-nav-pill" data-target="view-about">
+              ABOUT
+            </button>
+            <button class="quick-nav-pill" data-target="view-skills">
+              SKILLS
+            </button>
+            <button class="quick-nav-pill" data-target="view-history">
+              HISTORY
+            </button>
+            <button class="quick-nav-pill" data-target="view-projects">
+              PROJECTS
+            </button>
+            <button class="quick-nav-pill active" data-target="view-connect">
+              CONNECT
+            </button>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================================================
+       VANILLA JS STATE MANAGEMENT & SLASH WIPE TRANSITIONS
+       ======================================================================== -->
+    <script src="script.js"></script>
   </body>
 </html>
