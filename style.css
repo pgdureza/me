@@ -699,9 +699,48 @@ body.screen-recoil #app {
 
 /* Hero Name Header: Ransom Note Cutout Style */
 .hero-header {
+  position: relative;
   margin-bottom: 2.2rem;
   transform: rotate(-3deg) skewX(-6deg);
   max-width: 900px;
+}
+
+/* Mobile Hero Avatar (Stylized watermark behind PATRICK DUREZA on mobile) */
+.mobile-hero-avatar {
+  display: none;
+  position: absolute;
+  top: -24px;
+  right: 20px;
+  width: clamp(120px, 30vw, 160px);
+  aspect-ratio: 4 / 5;
+  transform: rotate(5deg) skewX(-4deg);
+  border: 3px solid var(--p5-red);
+  box-shadow: 6px 6px 0 var(--p5-black);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mobile-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: contrast(1.18) brightness(0.92);
+  opacity: 0.6;
+}
+
+.mobile-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(230, 0, 18, 0.22) 0px,
+    rgba(230, 0, 18, 0.22) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
 }
 
 .hero-tag {
@@ -718,6 +757,8 @@ body.screen-recoil #app {
 }
 
 .hero-name-container {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -759,6 +800,8 @@ body.screen-recoil #app {
 }
 
 .hero-subtitle {
+  position: relative;
+  z-index: 2;
   display: block;
   margin-top: 8px;
   font-family: var(--font-display);
@@ -1695,6 +1738,21 @@ body.screen-recoil #app {
   }
   .home-portrait-col {
     display: none;
+  }
+  .mobile-hero-avatar {
+    display: block;
+  }
+  .ransom-box.red {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-hero-avatar {
+    width: clamp(100px, 26vw, 130px);
+    top: -18px;
+    right: 10px;
+    opacity: 0.55;
   }
 }
 
