@@ -57,7 +57,6 @@
     "EXECUTE PROTOCOL!",
     "BUILD SUCCESS!",
     "MIGRATION DONE!",
-    "TARGET LOCKED!",
     "HOTFIX APPLIED!",
     "STACK CLEARED!",
   ];
