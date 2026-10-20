@@ -2,14 +2,14 @@
   "use strict";
 
   // Elements
-  const wipe = document.getElementById("slash-wipe");
-  const cutinText = document.getElementById("cutin-text");
+  // const wipe = document.getElementById("slash-wipe");
+  // const cutinText = document.getElementById("cutin-text");
   const screens = document.querySelectorAll(".view-screen");
   const menuItems = document.querySelectorAll(".p5-menu-item");
   const backButtons = document.querySelectorAll(".js-back-btn");
-  const quickNavButtons = document.querySelectorAll(
-    ".quick-nav-pill[data-target]",
-  );
+  // const quickNavButtons = document.querySelectorAll(
+  //   ".quick-nav-pill[data-target]",
+  // );
   const dateHud = document.getElementById("hud-date");
 
   // Set today's date dynamically in P5 calendar format
@@ -136,13 +136,13 @@
     }
   }
 
-  function navigateBack() {
-    if (window.p5Router) {
-      window.p5Router.navigateBack();
-    } else {
-      switchView("view-home");
-    }
-  }
+  // function navigateBack() {
+  //   if (window.p5Router) {
+  //     window.p5Router.navigateBack();
+  //   } else {
+  //     navigateTo("view-home");
+  //   }
+  // }
 
   // Initialize Router and listen for route / history changes
   if (window.p5Router) {
@@ -176,34 +176,40 @@
     }
   }
 
-  // Main Menu Click & Key Events
-  menuItems.forEach((item) => {
+  // Arrow Up / Down selection state for Main Menu
+  let selectedMenuIndex = -1;
+
+  // Track hover and focus to keep selected index in sync
+  menuItems.forEach((item, index) => {
+    item.addEventListener("mouseenter", () => {
+      selectedMenuIndex = index;
+    });
+    item.addEventListener("focus", () => {
+      selectedMenuIndex = index;
+    });
+
     const target = item.getAttribute("data-target");
     item.addEventListener("click", () => navigateTo(target));
-    item.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        navigateTo(target);
-      }
-    });
   });
 
   // Back / Cancel Buttons
   backButtons.forEach((btn) => {
-    btn.addEventListener("click", () => navigateBack());
+    btn.addEventListener("click", () => navigateTo("view-home"));
   });
 
   // Persistent Quick Nav Buttons
   if (persistentNav) {
-    persistentNav.querySelectorAll(".quick-nav-pill[data-target]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-target");
-        if (target) navigateTo(target);
+    persistentNav
+      .querySelectorAll(".quick-nav-pill[data-target]")
+      .forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-target");
+          if (target) navigateTo(target);
+        });
       });
-    });
   }
 
-  // Keyboard Controls (1-5 to navigate, ESC / Backspace to return)
+  // Keyboard Controls (ArrowUp/ArrowDown to select, Space/Enter to execute, ESC / Backspace to return)
   window.addEventListener("keydown", (e) => {
     if (isTransitioning) return;
 
@@ -213,28 +219,50 @@
       currentViewId !== "view-home"
     ) {
       e.preventDefault();
-      navigateBack();
+      switchView("view-home");
       return;
     }
 
-    // Numeric shortcuts on Home screen
+    // Home screen Arrow navigation and Space / Enter execution
     if (currentViewId === "view-home") {
-      switch (e.key) {
-        case "1":
-          navigateTo("view-about");
-          break;
-        case "2":
-          navigateTo("view-skills");
-          break;
-        case "3":
-          navigateTo("view-history");
-          break;
-        case "4":
-          navigateTo("view-projects");
-          break;
-        case "5":
-          navigateTo("view-connect");
-          break;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (
+          selectedMenuIndex < 0 ||
+          selectedMenuIndex >= menuItems.length - 1
+        ) {
+          selectedMenuIndex = 0;
+        } else {
+          selectedMenuIndex++;
+        }
+        menuItems[selectedMenuIndex].focus();
+        return;
+      }
+
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (selectedMenuIndex <= 0) {
+          selectedMenuIndex = menuItems.length - 1;
+        } else {
+          selectedMenuIndex--;
+        }
+        menuItems[selectedMenuIndex].focus();
+        return;
+      }
+
+      if (e.key === " " || e.code === "Space" || e.key === "Enter") {
+        if (selectedMenuIndex >= 0 && selectedMenuIndex < menuItems.length) {
+          e.preventDefault();
+          const target =
+            menuItems[selectedMenuIndex].getAttribute("data-target");
+          if (target) navigateTo(target);
+        } else if (menuItems.length > 0) {
+          e.preventDefault();
+          selectedMenuIndex = 0;
+          menuItems[0].focus();
+          const target = menuItems[0].getAttribute("data-target");
+          if (target) navigateTo(target);
+        }
       }
     }
   });

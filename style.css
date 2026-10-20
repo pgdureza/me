@@ -373,6 +373,9 @@ body {
 #view-history.view-exit .mission-card:nth-child(5) {
   animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both;
 }
+#view-history.view-exit .mission-card:nth-child(6) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 120ms both;
+}
 
 /* Projects Exit */
 #view-projects.view-exit .project-card:nth-child(1) {
@@ -440,6 +443,9 @@ body {
 }
 #view-history.view-enter .mission-card:nth-child(5) {
   animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 125ms both;
+}
+#view-history.view-enter .mission-card:nth-child(6) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
 }
 
 /* Projects Enter */
@@ -794,11 +800,13 @@ body {
 
 /* Menu Hover / Active Focus Effects */
 .p5-menu-item:hover,
+.p5-menu-item:focus,
 .p5-menu-item:focus-visible {
   transform: translateX(18px) scale(1.03);
 }
 
 .p5-menu-item:hover .p5-menu-btn,
+.p5-menu-item:focus .p5-menu-btn,
 .p5-menu-item:focus-visible .p5-menu-btn {
   background: var(--p5-yellow);
   color: var(--p5-black);
@@ -807,11 +815,13 @@ body {
 }
 
 .p5-menu-item:hover .p5-menu-btn::before,
+.p5-menu-item:focus .p5-menu-btn::before,
 .p5-menu-item:focus-visible .p5-menu-btn::before {
   left: 120%;
 }
 
 .p5-menu-item:hover .menu-index,
+.p5-menu-item:focus .menu-index,
 .p5-menu-item:focus-visible .menu-index {
   background: var(--p5-black);
   color: var(--p5-yellow);
@@ -819,11 +829,13 @@ body {
 }
 
 .p5-menu-item:hover .menu-label,
+.p5-menu-item:focus .menu-label,
 .p5-menu-item:focus-visible .menu-label {
   color: var(--p5-black);
 }
 
 .p5-menu-item:hover .menu-sublabel,
+.p5-menu-item:focus .menu-sublabel,
 .p5-menu-item:focus-visible .menu-sublabel {
   color: var(--p5-red-dark);
   font-weight: bold;
@@ -976,6 +988,7 @@ body {
   overflow-x: hidden;
   padding-top: 28px;
   padding-right: 12px;
+  padding-left: 12px;
   padding-bottom: 2.5rem;
   position: relative;
   z-index: 20;
@@ -1198,7 +1211,7 @@ body {
 }
 
 /* ==========================================================================
-       SECTION 2: SKILL MATRIX ("SKILL AFFINITIES")
+       SECTION 2: TECH STACK ("SKILL AFFINITIES")
        ========================================================================== */
 .affinity-groups-container {
   display: flex;
@@ -1760,5 +1773,14 @@ body {
     padding: 3px 6px;
     font-size: 0.8rem;
     letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 767px) {
+  #persistent-quick-nav {
+    display: none;
+  }
+  .menu-hint-bar {
+    display: none;
   }
 }
