@@ -338,24 +338,52 @@ body {
 }
 
 /* Skills Exit */
-#view-skills.view-exit .affinity-group:nth-child(1) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 20ms both; }
-#view-skills.view-exit .affinity-group:nth-child(2) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 40ms both; }
-#view-skills.view-exit .affinity-group:nth-child(3) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 60ms both; }
-#view-skills.view-exit .affinity-group:nth-child(4) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 80ms both; }
-#view-skills.view-exit .affinity-group:nth-child(5) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both; }
-#view-skills.view-exit .affinity-group:nth-child(6) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 120ms both; }
+#view-skills.view-exit .affinity-group:nth-child(1) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 20ms both;
+}
+#view-skills.view-exit .affinity-group:nth-child(2) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 40ms both;
+}
+#view-skills.view-exit .affinity-group:nth-child(3) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 60ms both;
+}
+#view-skills.view-exit .affinity-group:nth-child(4) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 80ms both;
+}
+#view-skills.view-exit .affinity-group:nth-child(5) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both;
+}
+#view-skills.view-exit .affinity-group:nth-child(6) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 120ms both;
+}
 
 /* History Exit */
-#view-history.view-exit .mission-card:nth-child(1) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 20ms both; }
-#view-history.view-exit .mission-card:nth-child(2) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 40ms both; }
-#view-history.view-exit .mission-card:nth-child(3) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 60ms both; }
-#view-history.view-exit .mission-card:nth-child(4) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 80ms both; }
-#view-history.view-exit .mission-card:nth-child(5) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both; }
+#view-history.view-exit .mission-card:nth-child(1) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 20ms both;
+}
+#view-history.view-exit .mission-card:nth-child(2) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 40ms both;
+}
+#view-history.view-exit .mission-card:nth-child(3) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 60ms both;
+}
+#view-history.view-exit .mission-card:nth-child(4) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 80ms both;
+}
+#view-history.view-exit .mission-card:nth-child(5) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both;
+}
 
 /* Projects Exit */
-#view-projects.view-exit .project-card:nth-child(1) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 25ms both; }
-#view-projects.view-exit .project-card:nth-child(2) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 50ms both; }
-#view-projects.view-exit .project-card:nth-child(3) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 75ms both; }
+#view-projects.view-exit .project-card:nth-child(1) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 25ms both;
+}
+#view-projects.view-exit .project-card:nth-child(2) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 50ms both;
+}
+#view-projects.view-exit .project-card:nth-child(3) {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 75ms both;
+}
 
 /* Connect Exit */
 #view-connect.view-exit .calling-card-wrapper {
@@ -378,24 +406,52 @@ body {
 }
 
 /* Skills Enter */
-#view-skills.view-enter .affinity-group:nth-child(1) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 25ms both; }
-#view-skills.view-enter .affinity-group:nth-child(2) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 50ms both; }
-#view-skills.view-enter .affinity-group:nth-child(3) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 75ms both; }
-#view-skills.view-enter .affinity-group:nth-child(4) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 100ms both; }
-#view-skills.view-enter .affinity-group:nth-child(5) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 125ms both; }
-#view-skills.view-enter .affinity-group:nth-child(6) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 150ms both; }
+#view-skills.view-enter .affinity-group:nth-child(1) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 25ms both;
+}
+#view-skills.view-enter .affinity-group:nth-child(2) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 50ms both;
+}
+#view-skills.view-enter .affinity-group:nth-child(3) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 75ms both;
+}
+#view-skills.view-enter .affinity-group:nth-child(4) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 100ms both;
+}
+#view-skills.view-enter .affinity-group:nth-child(5) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 125ms both;
+}
+#view-skills.view-enter .affinity-group:nth-child(6) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+}
 
 /* History Enter */
-#view-history.view-enter .mission-card:nth-child(1) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 25ms both; }
-#view-history.view-enter .mission-card:nth-child(2) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 50ms both; }
-#view-history.view-enter .mission-card:nth-child(3) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 75ms both; }
-#view-history.view-enter .mission-card:nth-child(4) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 100ms both; }
-#view-history.view-enter .mission-card:nth-child(5) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 125ms both; }
+#view-history.view-enter .mission-card:nth-child(1) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 25ms both;
+}
+#view-history.view-enter .mission-card:nth-child(2) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 50ms both;
+}
+#view-history.view-enter .mission-card:nth-child(3) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 75ms both;
+}
+#view-history.view-enter .mission-card:nth-child(4) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 100ms both;
+}
+#view-history.view-enter .mission-card:nth-child(5) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 125ms both;
+}
 
 /* Projects Enter */
-#view-projects.view-enter .project-card:nth-child(1) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 30ms both; }
-#view-projects.view-enter .project-card:nth-child(2) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 60ms both; }
-#view-projects.view-enter .project-card:nth-child(3) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 90ms both; }
+#view-projects.view-enter .project-card:nth-child(1) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 30ms both;
+}
+#view-projects.view-enter .project-card:nth-child(2) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+#view-projects.view-enter .project-card:nth-child(3) {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 90ms both;
+}
 
 /* Connect Enter */
 #view-connect.view-enter .calling-card-wrapper {
@@ -742,7 +798,8 @@ body {
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.8rem;
-  color: var(--p5-yellow);
+  color: var(--p5-red-bright);
+  display: none;
   opacity: 0;
   transition: all 0.15s ease;
   z-index: 3;
@@ -941,6 +998,8 @@ body {
   padding-bottom: 2.5rem;
   position: relative;
   z-index: 20;
+  max-width: 1600px;
+  margin: auto;
 }
 
 /* Stylized Persona Custom Scrollbar */
@@ -1562,7 +1621,9 @@ body {
   padding: 4px 12px;
   border: 2px solid var(--p5-white);
   box-shadow: 4px 4px 0 var(--p5-black);
-  transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  transition:
+    translate 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
 }
 
 .quick-nav-bar.visible {
