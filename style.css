@@ -792,19 +792,6 @@ body {
   transition: color 0.15s ease;
 }
 
-.menu-slash-deco {
-  position: absolute;
-  right: -25px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.8rem;
-  color: var(--p5-red-bright);
-  display: none;
-  opacity: 0;
-  transition: all 0.15s ease;
-  z-index: 3;
-}
-
 /* Menu Hover / Active Focus Effects */
 .p5-menu-item:hover,
 .p5-menu-item:focus-visible {
@@ -840,12 +827,6 @@ body {
 .p5-menu-item:focus-visible .menu-sublabel {
   color: var(--p5-red-dark);
   font-weight: bold;
-}
-
-.p5-menu-item:hover .menu-slash-deco,
-.p5-menu-item:focus-visible .menu-slash-deco {
-  opacity: 1;
-  right: -32px;
 }
 
 /* Keybind Hint Bar */
@@ -1217,7 +1198,7 @@ body {
 }
 
 /* ==========================================================================
-       SECTION 2: SKILL MATRIX ("PERSONA AFFINITIES")
+       SECTION 2: SKILL MATRIX ("SKILL AFFINITIES")
        ========================================================================== */
 .affinity-groups-container {
   display: flex;
@@ -1394,7 +1375,7 @@ body {
 }
 
 /* ==========================================================================
-       SECTION 4: PERSONAL PROJECTS ("TREASURE VAULT")
+       SECTION 4: PERSONAL PROJECTS ("SIDE QUESTS")
        ========================================================================== */
 .projects-grid {
   display: grid;
