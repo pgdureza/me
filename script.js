@@ -65,74 +65,66 @@
     return cutinPhrases[Math.floor(Math.random() * cutinPhrases.length)];
   }
 
+  const persistentNav = document.getElementById("persistent-quick-nav");
+
   function switchView(targetViewId) {
     if (isTransitioning || targetViewId === currentViewId) return;
     isTransitioning = true;
 
-    // Pick random P5 combat shout for cut-in
-    cutinText.textContent = getRandomCutin();
+    const currentScreen = document.getElementById(currentViewId);
+    const targetScreen = document.getElementById(targetViewId);
+    const isGoingHome = targetViewId === "view-home";
+    const isLeavingHome = currentViewId === "view-home";
 
-    // 1. Trigger Screen Recoil Jolt & Dual Counter-Slash In
-    document.body.classList.add("screen-recoil");
-    wipe.className = "animating phase-in";
-
-    // 2. Hit-Stop Window (at 220ms):
-    // Blades have collided in the center; freeze for 90ms while cut-in badge jitters
-    setTimeout(() => {
-      // Swap active screen seamlessly during the frozen impact moment
-      screens.forEach((screen) => {
-        if (screen.id === targetViewId) {
-          screen.classList.add("active");
+    // Handle persistent bottom menu slide in / out
+    if (persistentNav) {
+      if (isLeavingHome) {
+        // Slide IN when coming from home
+        persistentNav.classList.add("visible");
+      } else if (isGoingHome) {
+        // Slide OUT when going back to home
+        persistentNav.classList.remove("visible");
+      }
+      persistentNav.querySelectorAll(".quick-nav-pill").forEach((pill) => {
+        if (pill.dataset.target === targetViewId) {
+          pill.classList.add("active");
         } else {
-          screen.classList.remove("active");
+          pill.classList.remove("active");
         }
       });
+    }
 
-      // Reset scroll position and clear previous reveal animation
-      const targetScreen = document.getElementById(targetViewId);
-      let targetStage = null;
+    // 1. Phase 1: Outgoing screen components drop down with rapid stagger
+    if (currentScreen) {
+      currentScreen.classList.remove("view-enter");
+      currentScreen.classList.add("view-exit");
+    }
+
+    // 2. Phase 2: Hand-off at 200ms when outgoing elements have dropped
+    setTimeout(() => {
+      if (currentScreen) {
+        currentScreen.classList.remove("active", "view-exit");
+      }
+
       if (targetScreen) {
+        targetScreen.classList.remove("view-exit");
+        targetScreen.classList.add("active", "view-enter");
         const viewport = targetScreen.querySelector(
           ".section-content-viewport",
         );
         if (viewport) viewport.scrollTop = 0;
-        targetStage =
-          targetScreen.querySelector(".section-stage") ||
-          targetScreen.querySelector(".home-main-layout");
-        if (targetStage) {
-          targetStage.classList.remove("view-stage-reveal");
-        }
       }
-
-      // Update active pill in quick-navs
-      document.querySelectorAll(".quick-nav-pill").forEach((pill) => {
-        if (pill.dataset.target === targetViewId) {
-          pill.classList.add("active");
-        } else if (pill.dataset.target) {
-          pill.classList.remove("active");
-        }
-      });
 
       currentViewId = targetViewId;
 
-      // 3. Breakaway Slice (at 310ms): Hit-stop finishes, opposing blades slice apart
+      // 3. Phase 3: Transition finishes after incoming components snap in (~340ms)
       setTimeout(() => {
-        document.body.classList.remove("screen-recoil");
-        wipe.className = "animating phase-out";
-
-        // TRIGGER the translateY entrance right as the blades slice apart!
-        if (targetStage) {
-          void targetStage.offsetWidth; // Force reflow to re-trigger animation
-          targetStage.classList.add("view-stage-reveal");
+        if (targetScreen) {
+          targetScreen.classList.remove("view-enter");
         }
-
-        // 4. Clean shutdown (at 230ms after breakaway)
-        setTimeout(() => {
-          wipe.className = "";
-          isTransitioning = false;
-        }, 230);
-      }, 90); // 90ms hit-stop impact freeze!
-    }, 220); // 220ms slice-in collision!
+        isTransitioning = false;
+      }, 340);
+    }, 200);
   }
 
   // Navigation dispatch helpers via p5Router
@@ -167,20 +159,20 @@
           screen.classList.remove("active");
         }
       });
-      document.querySelectorAll(".quick-nav-pill").forEach((pill) => {
-        if (pill.dataset.target === initialView) {
-          pill.classList.add("active");
-        } else if (pill.dataset.target) {
-          pill.classList.remove("active");
-        }
-      });
-      currentViewId = initialView;
 
-      const targetScreen = document.getElementById(initialView);
-      if (targetScreen) {
-        const stage = targetScreen.querySelector(".section-stage");
-        if (stage) stage.classList.add("view-stage-reveal");
+      // Show persistent quick-nav when starting inside a section
+      if (persistentNav) {
+        persistentNav.classList.add("visible");
+        persistentNav.querySelectorAll(".quick-nav-pill").forEach((pill) => {
+          if (pill.dataset.target === initialView) {
+            pill.classList.add("active");
+          } else {
+            pill.classList.remove("active");
+          }
+        });
       }
+
+      currentViewId = initialView;
     }
   }
 
@@ -201,13 +193,15 @@
     btn.addEventListener("click", () => navigateBack());
   });
 
-  // Quick Nav Buttons
-  quickNavButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-target");
-      if (target) navigateTo(target);
+  // Persistent Quick Nav Buttons
+  if (persistentNav) {
+    persistentNav.querySelectorAll(".quick-nav-pill[data-target]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        if (target) navigateTo(target);
+      });
     });
-  });
+  }
 
   // Keyboard Controls (1-5 to navigate, ESC / Backspace to return)
   window.addEventListener("keydown", (e) => {

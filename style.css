@@ -238,282 +238,173 @@ body {
 }
 
 /* ==========================================================================
-       SCREEN WIPE OVERLAY (SLASH TRANSITION - NO WHITE FLASHES)
-       ========================================================================== */
-/* ==========================================================================
-       SCREEN WIPE OVERLAY (AUTHENTIC P5 DUAL COUNTER-SLASH & HIT-STOP)
-       ========================================================================== */
+   PERSONA 5 KINETIC STAGGERED COMPONENT TRANSITIONS
+   ========================================================================== */
 #slash-wipe {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  pointer-events: none;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  display: none !important;
 }
 
-#slash-wipe.animating {
-  display: flex;
-}
-
-/* Screen Recoil Shockwave on outgoing view */
-body.screen-recoil #app {
-  transform: scale(0.975) rotate(-0.5deg);
-  filter: brightness(0.9) contrast(1.1);
-  transition:
-    transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.16s ease;
-}
-
-#app {
-  transition:
-    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    filter 0.25s ease;
-}
-
-.wipe-blade {
-  position: absolute;
-  width: 270vw;
-  height: 270vh;
-  will-change: transform;
-}
-
-/* Blade 1 (Crimson Red): Slices in from top-left, exits bottom-right */
-.wipe-blade.blade-red {
-  background: linear-gradient(
-    135deg,
-    var(--p5-red-bright) 0%,
-    var(--p5-red-dark) 100%
-  );
-  z-index: 2;
-  transform: rotate(-24deg) translateX(-220%);
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
-}
-
-/* Blade 2 (Obsidian Black): Counter-slices from bottom-right, exits top-left */
-.wipe-blade.blade-black {
-  background: var(--p5-black);
-  z-index: 3;
-  transform: rotate(-24deg) translateX(220%);
-  border-left: 6px solid var(--p5-yellow);
-  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.98);
-}
-
-/* Golden Energy Cutting Seam */
-.wipe-slash-line {
-  position: absolute;
-  width: 300vw;
-  height: 10px;
-  background: var(--p5-yellow);
-  box-shadow:
-    0 0 20px var(--p5-yellow),
-    0 0 40px var(--p5-red);
-  transform: rotate(-24deg) scaleX(0);
-  z-index: 4;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-/* Comic Spark Stars */
-.wipe-spark-star {
-  position: absolute;
-  font-size: 3rem;
-  color: var(--p5-yellow);
-  text-shadow:
-    3px 3px 0 var(--p5-black),
-    0 0 15px var(--p5-yellow);
-  z-index: 7;
-  opacity: 0;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-.wipe-spark-star.spark-1 {
-  top: 38%;
-  left: 45%;
-}
-.wipe-spark-star.spark-2 {
-  bottom: 40%;
-  right: 44%;
-}
-
-#slash-wipe.phase-in .wipe-spark-star.spark-1 {
-  animation: p5StarBurst1 0.28s ease-out forwards;
-}
-#slash-wipe.phase-in .wipe-spark-star.spark-2 {
-  animation: p5StarBurst2 0.28s ease-out 0.04s forwards;
-}
-
-/* Phase 1: Dual Counter-Slash Slices In */
-#slash-wipe.phase-in .blade-red {
-  animation: p5RedSliceIn 0.22s cubic-bezier(0.12, 0.9, 0.25, 1) forwards;
-}
-#slash-wipe.phase-in .blade-black {
-  animation: p5BlackSliceIn 0.22s cubic-bezier(0.12, 0.9, 0.25, 1) forwards;
-}
-#slash-wipe.phase-in .wipe-slash-line {
-  animation: p5SeamFlashIn 0.22s ease-out forwards;
-}
-
-/* Phase 2: Dual Counter-Slash Slices Out in Opposing Directions */
-#slash-wipe.phase-out .blade-red {
-  animation: p5RedSliceOut 0.22s cubic-bezier(0.8, 0, 0.2, 1) forwards;
-}
-#slash-wipe.phase-out .blade-black {
-  animation: p5BlackSliceOut 0.22s cubic-bezier(0.8, 0, 0.2, 1) forwards;
-}
-#slash-wipe.phase-out .wipe-slash-line {
-  animation: p5SeamFlashOut 0.18s ease-out forwards;
-}
-
-@keyframes p5RedSliceIn {
+@keyframes p5ItemDropOut {
   0% {
-    transform: rotate(-24deg) translateX(-220%);
-  }
-  100% {
-    transform: rotate(-24deg) translateX(0%);
-  }
-}
-@keyframes p5RedSliceOut {
-  0% {
-    transform: rotate(-24deg) translateX(0%);
-  }
-  100% {
-    transform: rotate(-24deg) translateX(220%);
-  }
-}
-
-@keyframes p5BlackSliceIn {
-  0% {
-    transform: rotate(-24deg) translateX(220%);
-  }
-  100% {
-    transform: rotate(-24deg) translateX(0%);
-  }
-}
-@keyframes p5BlackSliceOut {
-  0% {
-    transform: rotate(-24deg) translateX(0%);
-  }
-  100% {
-    transform: rotate(-24deg) translateX(-220%);
-  }
-}
-
-@keyframes p5SeamFlashIn {
-  0% {
-    transform: rotate(-24deg) scaleX(0);
-    opacity: 0;
-  }
-  80% {
-    transform: rotate(-24deg) scaleX(1);
     opacity: 1;
+    translate: 0 0;
   }
   100% {
-    transform: rotate(-24deg) scaleX(1);
-    opacity: 0.8;
+    opacity: 0;
+    translate: 0 65px;
   }
 }
-@keyframes p5SeamFlashOut {
+
+@keyframes p5ItemSlideUp {
   0% {
-    transform: rotate(-24deg) scaleX(1);
-    opacity: 0.8;
+    opacity: 0;
+    translate: 0 65px;
   }
   100% {
-    transform: rotate(-24deg) scaleX(0);
-    opacity: 0;
-  }
-}
-
-/* Cut-in Badge with Hit-Stop Shake */
-.wipe-cutin-text {
-  position: absolute;
-  z-index: 6;
-  font-family: var(--font-headline);
-  font-size: clamp(2.2rem, 6.5vw, 5.2rem);
-  color: var(--p5-black);
-  background: var(--p5-yellow);
-  padding: 10px 42px;
-  transform: rotate(-12deg) scale(0);
-  box-shadow: 12px 12px 0 var(--p5-black);
-  letter-spacing: 3px;
-  pointer-events: none;
-  text-transform: uppercase;
-  will-change: transform;
-}
-
-#slash-wipe.phase-in .wipe-cutin-text {
-  animation: p5CutinHitStop 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275)
-    forwards;
-}
-
-#slash-wipe.phase-out .wipe-cutin-text {
-  animation: p5CutinBurstOut 0.16s ease-out forwards;
-}
-
-@keyframes p5CutinHitStop {
-  0% {
-    transform: rotate(-16deg) scale(0.3) translate(-20px, 10px);
-    opacity: 0;
-  }
-  70% {
-    transform: rotate(-11deg) scale(1.12) translate(5px, -3px);
     opacity: 1;
-  }
-  85% {
-    transform: rotate(-13deg) scale(0.98) translate(-3px, 2px);
-  }
-  100% {
-    transform: rotate(-12deg) scale(1) translate(0, 0);
-    opacity: 1;
+    translate: 0 0;
   }
 }
 
-@keyframes p5CutinBurstOut {
-  0% {
-    transform: rotate(-12deg) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(-8deg) scale(1.25) translateY(-25px);
-    opacity: 0;
-  }
+/* --------------------------------------------------------------------------
+   HOME SCREEN: Staggered Drop-Out (Exit)
+   -------------------------------------------------------------------------- */
+#view-home.view-exit .hero-header {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 0ms both;
+}
+#view-home.view-exit .p5-menu-item:nth-child(1) {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 20ms both;
+}
+#view-home.view-exit .p5-menu-item:nth-child(2) {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 40ms both;
+}
+#view-home.view-exit .p5-menu-item:nth-child(3) {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 60ms both;
+}
+#view-home.view-exit .p5-menu-item:nth-child(4) {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 80ms both;
+}
+#view-home.view-exit .p5-menu-item:nth-child(5) {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 100ms both;
+}
+#view-home.view-exit .menu-hint-bar {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 120ms both;
+}
+#view-home.view-exit .home-portrait-col {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 30ms both;
 }
 
-@keyframes p5StarBurst1 {
-  0% {
-    transform: scale(0) rotate(0deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.4) rotate(90deg) translate(-20px, -20px);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(180deg) translate(-40px, -35px);
-    opacity: 0;
-  }
+/* --------------------------------------------------------------------------
+   HOME SCREEN: Staggered Slide-Up (Enter)
+   -------------------------------------------------------------------------- */
+#view-home.view-enter .hero-header {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0ms both;
+}
+#view-home.view-enter .p5-menu-item:nth-child(1) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 30ms both;
+}
+#view-home.view-enter .p5-menu-item:nth-child(2) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+#view-home.view-enter .p5-menu-item:nth-child(3) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 90ms both;
+}
+#view-home.view-enter .p5-menu-item:nth-child(4) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+}
+#view-home.view-enter .p5-menu-item:nth-child(5) {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+}
+#view-home.view-enter .menu-hint-bar {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+}
+#view-home.view-enter .home-portrait-col {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
 }
 
-@keyframes p5StarBurst2 {
-  0% {
-    transform: scale(0) rotate(0deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.5) rotate(-90deg) translate(20px, 20px);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(-180deg) translate(40px, 35px);
-    opacity: 0;
-  }
+/* --------------------------------------------------------------------------
+   SECTION VIEWS: Staggered Drop-Out (Exit)
+   -------------------------------------------------------------------------- */
+.view-screen.view-exit .section-hud-header {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 0ms both;
+}
+
+/* About Me Exit */
+#view-about.view-exit .dossier-card {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 25ms both;
+}
+#view-about.view-exit .bio-dialog-card {
+  animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 50ms both;
+}
+
+/* Skills Exit */
+#view-skills.view-exit .affinity-group:nth-child(1) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 20ms both; }
+#view-skills.view-exit .affinity-group:nth-child(2) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 40ms both; }
+#view-skills.view-exit .affinity-group:nth-child(3) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 60ms both; }
+#view-skills.view-exit .affinity-group:nth-child(4) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 80ms both; }
+#view-skills.view-exit .affinity-group:nth-child(5) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both; }
+#view-skills.view-exit .affinity-group:nth-child(6) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 120ms both; }
+
+/* History Exit */
+#view-history.view-exit .mission-card:nth-child(1) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 20ms both; }
+#view-history.view-exit .mission-card:nth-child(2) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 40ms both; }
+#view-history.view-exit .mission-card:nth-child(3) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 60ms both; }
+#view-history.view-exit .mission-card:nth-child(4) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 80ms both; }
+#view-history.view-exit .mission-card:nth-child(5) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 100ms both; }
+
+/* Projects Exit */
+#view-projects.view-exit .project-card:nth-child(1) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 25ms both; }
+#view-projects.view-exit .project-card:nth-child(2) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 50ms both; }
+#view-projects.view-exit .project-card:nth-child(3) { animation: p5ItemDropOut 0.15s cubic-bezier(0.7, 0, 0.3, 1) 75ms both; }
+
+/* Connect Exit */
+#view-connect.view-exit .calling-card-wrapper {
+  animation: p5ItemDropOut 0.16s cubic-bezier(0.7, 0, 0.3, 1) 30ms both;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION VIEWS: Staggered Slide-Up (Enter)
+   -------------------------------------------------------------------------- */
+.view-screen.view-enter .section-hud-header {
+  animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0ms both;
+}
+
+/* About Me Enter */
+#view-about.view-enter .dossier-card {
+  animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 35ms both;
+}
+#view-about.view-enter .bio-dialog-card {
+  animation: p5ItemSlideUp 0.34s cubic-bezier(0.16, 1, 0.3, 1) 70ms both;
+}
+
+/* Skills Enter */
+#view-skills.view-enter .affinity-group:nth-child(1) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 25ms both; }
+#view-skills.view-enter .affinity-group:nth-child(2) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 50ms both; }
+#view-skills.view-enter .affinity-group:nth-child(3) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 75ms both; }
+#view-skills.view-enter .affinity-group:nth-child(4) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 100ms both; }
+#view-skills.view-enter .affinity-group:nth-child(5) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 125ms both; }
+#view-skills.view-enter .affinity-group:nth-child(6) { animation: p5ItemSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) 150ms both; }
+
+/* History Enter */
+#view-history.view-enter .mission-card:nth-child(1) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 25ms both; }
+#view-history.view-enter .mission-card:nth-child(2) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 50ms both; }
+#view-history.view-enter .mission-card:nth-child(3) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 75ms both; }
+#view-history.view-enter .mission-card:nth-child(4) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 100ms both; }
+#view-history.view-enter .mission-card:nth-child(5) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 125ms both; }
+
+/* Projects Enter */
+#view-projects.view-enter .project-card:nth-child(1) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 30ms both; }
+#view-projects.view-enter .project-card:nth-child(2) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 60ms both; }
+#view-projects.view-enter .project-card:nth-child(3) { animation: p5ItemSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) 90ms both; }
+
+/* Connect Enter */
+#view-connect.view-enter .calling-card-wrapper {
+  animation: p5ItemSlideUp 0.34s cubic-bezier(0.16, 1, 0.3, 1) 40ms both;
 }
 
 /* ==========================================================================
-       MAIN CONTAINER & VIEW SWITCHER
-       ========================================================================== */
+   MAIN CONTAINER & VIEW SWITCHER
+   ========================================================================== */
 #app {
   position: relative;
   width: 100vw;
@@ -536,22 +427,6 @@ body.screen-recoil #app {
   display: flex;
   opacity: 1;
   pointer-events: all;
-}
-
-/* Subtle TranslateY Entrance on view stages without overriding component skews */
-.view-stage-reveal {
-  animation: p5SubtleEntrance 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes p5SubtleEntrance {
-  0% {
-    opacity: 0.55;
-    transform: translateY(22px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ==========================================================================
@@ -1671,19 +1546,29 @@ body.screen-recoil #app {
   letter-spacing: 1px;
 }
 
-/* Bottom Quick Nav Bar for Sections */
+/* Bottom Quick Nav Bar (Pagewide - Slides up from home, slides down on return) */
 .quick-nav-bar {
-  position: absolute;
-  bottom: 16px;
+  position: fixed;
+  bottom: 18px;
   left: 50%;
   transform: translateX(-50%) rotate(-1deg);
+  translate: 0 100px;
+  opacity: 0;
+  pointer-events: none;
   display: flex;
   gap: 8px;
-  z-index: 30;
-  background: rgba(10, 10, 10, 0.85);
+  z-index: 50;
+  background: rgba(10, 10, 10, 0.9);
   padding: 4px 12px;
   border: 2px solid var(--p5-white);
   box-shadow: 4px 4px 0 var(--p5-black);
+  transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.quick-nav-bar.visible {
+  translate: 0 0;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .quick-nav-pill {
@@ -1824,6 +1709,14 @@ body.screen-recoil #app {
 
 @media (max-width: 600px) {
   .quick-nav-bar {
-    display: none; /* Hide on small mobile to maximize view space */
+    bottom: 8px;
+    padding: 3px 6px;
+    gap: 4px;
+    max-width: 96vw;
+  }
+  .quick-nav-pill {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
   }
 }
