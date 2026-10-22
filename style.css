@@ -240,10 +240,6 @@ body {
 /* ==========================================================================
    PERSONA 5 KINETIC STAGGERED COMPONENT TRANSITIONS
    ========================================================================== */
-#slash-wipe {
-  display: none !important;
-}
-
 @keyframes p5ItemDropOut {
   0% {
     opacity: 1;
