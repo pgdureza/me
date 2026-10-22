@@ -1,0 +1,14 @@
+index.html
+  h_2fa5c27bd3c78c 9,472
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "334bea21f757a65f4bae8a0c79fec4a954db87b6",
+  "prompts": {},
+  "humans": {
+    "h_2fa5c27bd3c78c": {
+      "author": "patrick.dureza <20631543+pgdureza@users.noreply.github.com>"
+    }
+  }
+}
